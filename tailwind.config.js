@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         orange: {
-          '' : 'hsl(26, 100%, 55%)',
+          main : 'hsl(26, 100%, 55%)',
           pale: 'hsl(25, 100%, 94%)'
         },
         blue: {
@@ -21,7 +21,7 @@ module.exports = {
         white: 'hsl(0, 0%, 100%)'
       },
       fontFamily: {
-        ubuntu: ['Kumbh Sans', 'sans-serif']
+        kumbh: ['Kumbh\\ Sans', 'sans-serif']
       },
       fontSize: {
         paragraph: '16px'
@@ -32,6 +32,9 @@ module.exports = {
       screens: {
         'mobile': '375px',
         'desktop': '1440px'
+      },
+      boxShadow: {
+        'custom': '0 10px 15px -3px hsl(25, 100%, 94%), 0 4px 6px -4px hsl(25, 100%, 94%)'
       }
     },
   },

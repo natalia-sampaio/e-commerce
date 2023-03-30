@@ -15,7 +15,7 @@ import IconMenu from './components/icons/IconMenu.vue';
       <IconLogo />
     </div>
     <div class="flex items-center">
-      <IconCart class="m-3" />
+      <IconCart :fill="'#69707D'" class="m-3" />
       <img src="./assets/images/image-avatar.png" alt="profile avatar" class="w-8 m-3">
     </div>
   </header>

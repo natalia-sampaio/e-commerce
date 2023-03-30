@@ -33,3 +33,5 @@ npm run build
 ```sh
 npm run lint
 ```
+
+Used vue transitions for the first time
