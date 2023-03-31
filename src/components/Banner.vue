@@ -1,15 +1,10 @@
 <script setup>
-import { Transition } from 'vue';
+import { Transition, ref } from 'vue';
 import IconNext from './icons/IconNext.vue';
 import IconPrevious from './icons/IconPrevious.vue';
+import Cart from './Cart.vue';
 
-</script>
-<script>
-export default {
-    data() {
-        return { show: 0 };
-    }
-}
+const show = ref(0);
 </script>
 
 <template>
@@ -21,7 +16,8 @@ export default {
             <img v-else-if="show == 2" src="../assets/images/image-product-3.jpg" alt=""/>
             <img v-else src="../assets/images/image-product-4.jpg" alt=""/>
         </Transition>
-        <IconNext class="absolute m-3 top-1/3 right-0" @click="show == 3 ? show = 0 : show ++" /> 
+        <IconNext class="absolute m-3 top-1/3 right-0" @click="show == 3 ? show = 0 : show ++" />
+        <Cart v-if="toggleCart"/>
     </div>
 
 </template>

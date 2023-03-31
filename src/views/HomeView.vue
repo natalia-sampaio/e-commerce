@@ -3,6 +3,7 @@ import Banner from '../components/Banner.vue';
 import IconCart from '../components/icons/IconCart.vue';
 import IconPlus from '../components/icons/IconPlus.vue';
 import IconMinus from '../components/icons/IconMinus.vue';
+
 </script>
 
 <script>
