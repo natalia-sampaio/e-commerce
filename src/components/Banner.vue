@@ -13,15 +13,15 @@ export default {
 </script>
 
 <template>
-    <div class="h-1/4">
-        <IconPrevious class="fixed m-3 top-1/4" @click="show == 0 ? show = 3 :show --" />
+    <div class="h-1/4 relative">
+        <IconPrevious class="absolute m-3 top-1/3" @click="show == 0 ? show = 3 :show --" />
         <Transition name="carousel" mode="out-in">
             <img v-if="show == 0" src="../assets/images/image-product-1.jpg" alt=""/>
             <img v-else-if="show == 1" src="../assets/images/image-product-2.jpg" alt=""/>
             <img v-else-if="show == 2" src="../assets/images/image-product-3.jpg" alt=""/>
             <img v-else src="../assets/images/image-product-4.jpg" alt=""/>
         </Transition>
-        <IconNext class="fixed m-3 top-1/4 right-0" @click="show == 3 ? show = 0 : show ++" /> 
+        <IconNext class="absolute m-3 top-1/3 right-0" @click="show == 3 ? show = 0 : show ++" /> 
     </div>
 
 </template>
@@ -37,5 +37,4 @@ export default {
 .carousel-leave-active {
     transition: all .5s ease-out
 }
-
 </style>
