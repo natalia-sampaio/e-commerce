@@ -3,6 +3,7 @@ import Product from '../components/Product.vue';
 import IconPlus from '../components/icons/IconPlus.vue';
 import IconMinus from '../components/icons/IconMinus.vue';
 import ItemsInput from '../components/ItemsInput.vue';
+import IconCart from '../components/icons/IconCart.vue';
 </script>
 
 <script>
@@ -35,7 +36,7 @@ export default {
             ]
         };
     },
-    components: { ItemsInput }
+    components: { ItemsInput, IconCart }
 }
 </script>
 
