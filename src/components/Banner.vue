@@ -9,6 +9,7 @@ const show = ref(0);
 
 <template>
     <div class="h-1/4 relative">
+        <Cart />
         <IconPrevious class="absolute m-3 top-1/3" @click="show == 0 ? show = 3 :show --" />
         <Transition name="carousel" mode="out-in">
             <img v-if="show == 0" src="../assets/images/image-product-1.jpg" alt=""/>
@@ -17,7 +18,6 @@ const show = ref(0);
             <img v-else src="../assets/images/image-product-4.jpg" alt=""/>
         </Transition>
         <IconNext class="absolute m-3 top-1/3 right-0" @click="show == 3 ? show = 0 : show ++" />
-        <Cart v-if="toggleCart"/>
     </div>
 
 </template>

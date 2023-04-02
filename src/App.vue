@@ -16,7 +16,7 @@ let collapsed = ref(true);
       <IconMenu class="m-3" @click="collapsed = false" />
       <IconLogo />
       <div v-if="!collapsed">
-        <div class="bg-white opacity-100 fixed top-0 left-0 h-full w-2/3 z-10">
+        <div class="bg-white opacity-100 fixed top-0 left-0 h-full w-2/3 z-20">
           <IconClose class="m-5" @click="collapsed = true" />
           <ul class="mx-5 my-10">
             <li class="my-5">
@@ -39,7 +39,7 @@ let collapsed = ref(true);
             </li>
           </ul>
         </div>
-        <div class="bg-black opacity-70 fixed top-0 right-0 h-full w-1/3 z-10"></div>
+        <div class="bg-black opacity-70 fixed top-0 right-0 h-full w-1/3 z-20"></div>
       </div>
     </div>
     <div class="flex items-center">
