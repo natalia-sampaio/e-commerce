@@ -3,7 +3,7 @@ import IconDelete from './icons/IconDelete.vue'
 </script>
 
 <template>
-  <div class="bg-white rounded-lg m-3 absolute top-0 z-10">
+  <div class="bg-white rounded-lg m-3 absolute top-0 z-10 shadow-2xl">
     <div class="border-b border-blue-grayish">
       <div class="p-6">
         <span>Cart</span>
