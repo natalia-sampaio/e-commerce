@@ -4,18 +4,10 @@ export const useCartStore = defineStore('cart', {
   state: () => {
     return {
       toggleCart: false,
-      cartItems: [],
-      item: "",
-      price: 0,
-      quantity: 0,
-      discount: false,
-      discountValue: 0
+      cartItems: []
     }
   },
   getters: {
-    count: (state) => state.cartItems.length,
-    priceWithDiscount() {
-      return this.price * this.discountValue
-    }
+    count: (state) => state.cartItems.length
   }
 })
