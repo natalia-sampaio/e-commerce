@@ -1,5 +1,5 @@
 <script setup>
-import { RouterView} from 'vue-router'
+import { RouterView, useRouter} from 'vue-router'
 import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
@@ -11,6 +11,13 @@ import Cart from './components/Cart.vue';
 let collapsed = ref(true);
 
 const cartStore = useCartStore();
+
+const router = useRouter();
+
+const goToCollections = () => {
+  collapsed = true;
+  router.push('/collections');
+}
 </script>
 
 <template>
@@ -23,7 +30,7 @@ const cartStore = useCartStore();
           <IconClose class="m-5" @click="collapsed = true" />
           <ul class="mx-5 my-10">
             <li class="my-5">
-              <button @click="collapsed = true">Collections</button>
+              <button @click="goToCollections">Collections</button>
             </li>
             <li class="my-5">
               <button @click="collapsed = true">Men</button>
@@ -38,7 +45,7 @@ const cartStore = useCartStore();
               <button @click="collapsed = true">Contact</button>
             </li>
             <li class="my-5">
-              <button @click="collapsed = true">Logon</button>
+              <button @click="collapsed = true">Logon or Signup</button>
             </li>
           </ul>
         </div>
