@@ -5,9 +5,12 @@ import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
 import IconClose from './components/icons/IconClose.vue';
 import { ref } from 'vue';
+import { useCartStore } from './stores/cart';
+import Cart from './components/Cart.vue';
 
 let collapsed = ref(true);
 
+const cartStore = useCartStore();
 </script>
 
 <template>
@@ -44,12 +47,14 @@ let collapsed = ref(true);
     </div>
     <div class="flex items-center">
       <button class="relative">
-        <span class="text-xs text-white rounded-3xl px-2 bg-orange-main absolute right-0 top-1">3</span>
-        <IconCart :fill="toggleCart ? '#000000' : '#69707D'" class="m-3" @click="toggleCart = !toggleCart"/>
+        <span class="text-xs text-white rounded-3xl px-2 bg-orange-main absolute right-0 top-1">{{ cartStore.cartItems }}</span>
+        <IconCart :fill="cartStore.toggleCart ? '#000000' : '#69707D'" class="m-3" @click="cartStore.toggleCart = !cartStore.toggleCart"/>
       </button>
       <img src="./assets/images/image-avatar.png" alt="profile avatar" class="w-8 m-3">
     </div>
   </header>
+  
+  <Cart v-if="cartStore.toggleCart" />
 
   <RouterView />
 </template>

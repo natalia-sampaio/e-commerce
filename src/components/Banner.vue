@@ -3,13 +3,13 @@ import { Transition, ref } from 'vue';
 import IconNext from './icons/IconNext.vue';
 import IconPrevious from './icons/IconPrevious.vue';
 import Cart from './Cart.vue';
+import { useCartStore } from '../stores/cart';
 
 const show = ref(0);
 </script>
 
 <template>
     <div class="h-1/4 relative">
-        <Cart />
         <IconPrevious class="absolute m-3 top-1/3" @click="show == 0 ? show = 3 :show --" />
         <Transition name="carousel" mode="out-in">
             <img v-if="show == 0" src="../assets/images/image-product-1.jpg" alt=""/>

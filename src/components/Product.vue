@@ -1,5 +1,8 @@
 <script setup>
+import { ref } from 'vue';
 import Banner from '../components/Banner.vue';
+
+const numberOfItems = ref(0)
 
 defineProps({
     brandName: "",
@@ -26,9 +29,9 @@ defineProps({
             </div>
             <span class="line-through text-blue-grayish"><slot name="cost"></slot></span>
         </div>
-        <div class="flex items-center justify-center m-6 h-12">
-            <slot name="numberOfItems"></slot>
-        </div>
+        <!-- <div class="flex items-center justify-center m-6 h-12">
+            <slot name="numberOfItems" :numberOfItems="numberOfItems"></slot>
+        </div> -->
         <div class="m-6 mb-16 flex justify-center bg-orange-main rounded-lg shadow-custom">
             <slot name="addToCartButton"></slot>
         </div>

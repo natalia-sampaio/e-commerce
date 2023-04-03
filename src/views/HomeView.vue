@@ -5,8 +5,11 @@ import IconMinus from '../components/icons/IconMinus.vue';
 import ItemsInput from '../components/ItemsInput.vue';
 import IconCart from '../components/icons/IconCart.vue';
 import { useProductsStore } from '../stores/products';
+import { useCartStore } from '../stores/cart';
 
 const productsStore = useProductsStore();
+
+const cartStore = useCartStore();
 
 </script>
 
@@ -16,21 +19,21 @@ const productsStore = useProductsStore();
       v-for="product in productsStore.products" 
       :key="product.id" 
       v-model:brandName="product.brand"
-      v-model:productName="product.name"
+      v-model:productName="product.title"
       v-model:productDescription="product.description"
-      v-model:finalCost="product.finalCost"
+      :finalCost="productsStore.getDiscountedPrice(product.id)"
     >
-      <template #discount v-if="product.discount > 0">
-        <span class="bg-orange-pale text-orange-main rounded px-2 py-[0.1rem]">{{ product.discount }}%</span>
+      <template #discount v-if="product.discountPercentage > 0">
+        <span class="bg-orange-pale text-orange-main rounded px-2 py-[0.1rem]">{{ product.discountPercentage }}%</span>
       </template>
-      <template #cost v-if="product.discount > 0">${{ product.cost }}</template>
-      <template #numberOfItems>
-        <IconMinus @click="product.numberOfItems == 0 ? '' : product.numberOfItems--" />
-        <ItemsInput v-model="product.numberOfItems" />
-        <IconPlus @click="product.numberOfItems++" />
-      </template>
+      <template #cost v-if="product.discountPercentage > 0">${{ product.price }}</template>
+      <!-- <template #numberOfItems>
+        <IconMinus @click.self="numberOfItems == 0 ? '' : numberOfItems--" />
+        <ItemsInput v-model="numberOfItems" />
+        <IconPlus @click.self="numberOfItems++" />
+      </template> -->
       <template #addToCartButton>
-        <button class="m-3 flex items-center justify-center text-white">
+        <button class="m-3 flex items-center justify-center text-white" @click.prevent="cartStore.addToCart(product)">
           <IconCart :fill="'#ffffff'" class="mr-4" />
           Add to cart
         </button>

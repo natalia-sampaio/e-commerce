@@ -5,32 +5,39 @@ export const useProductsStore = defineStore('products', {
         products: [
             {
                 id: 1,
-                images: [],
-                brand: "Sneaker company",
-                name: "Fall limited edition sneakers",
+                title: "Fall limited edition sneakers",
                 description: "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
-                cost: 250,
-                discount: 50,
-                finalCost: 125,
-                numberOfItems: 0
+                price: 250,
+                discountPercentage: 50,
+                rating: 4.69,
+                stock: 94,
+                brand: "Sneaker company",
+                category: "mens-shoes",
+                thumbnail: "/@/assets/images/image-product-1-thumbnail.jpg",
+                images: []                
             },
             {
                 id: 2,
-                images: [],
-                brand: "Sneaker company",
-                name: "Fall limited edition sneakers",
+                title: "Fall limited edition sneakers",
                 description: "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
-                cost: 250,
-                discount: 0,
-                finalCost: 250,
-                numberOfItems: 0
+                price: 320,
+                discountPercentage: 0.0,
+                rating: 4.69,
+                stock: 94,
+                brand: "Sneaker company",
+                category: "mens-shoes",
+                thumbnail: "/@/assets/images/image-product-1-thumbnail.jpg",
+                images: []
             }
         ]
     }),
-    getters: {
-        count: (state) => state.cartItems.length,
-        priceWithDiscount() {
-            return this.price * this.discountValue
+    actions: {
+        getDiscountedPrice(id) {
+            const product = this.products.find(element => element.id === id);
+
+            const discountedPrice = product.discountPercentage > 0.0 ? product.price/100*product.discountPercentage : product.price;
+
+            return discountedPrice;
         }
     }
 })
