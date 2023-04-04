@@ -34,7 +34,8 @@ module.exports = {
         'desktop': '1440px'
       },
       boxShadow: {
-        'custom': '0 25px 50px -12px rgba(255, 125, 26, 0.5)'
+        'custom': '0 25px 50px -12px rgba(255, 125, 26, 0.5)',
+        'customcard': '5px 5px 0px 0px rgba(255,125,26,1.000)'
       }
     },
   },
