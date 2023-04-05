@@ -1,5 +1,5 @@
 <script setup>
-import { RouterView, useRouter} from 'vue-router'
+import { RouterView} from 'vue-router'
 import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';

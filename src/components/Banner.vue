@@ -2,8 +2,6 @@
 import { Transition, ref } from 'vue';
 import IconNext from './icons/IconNext.vue';
 import IconPrevious from './icons/IconPrevious.vue';
-import Cart from './Cart.vue';
-import { useCartStore } from '../stores/cart';
 
 const show = ref(0);
 </script>
