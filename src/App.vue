@@ -30,7 +30,7 @@ export default {
   <header class="flex items-center justify-between transition-all duration-500">
     <div class="flex items-center transition-all duration-500">
       <IconMenu class="m-3 transition-all duration-700 motion-reduce:transition-all" :class="{'rotate-180': mobileNav}" @click="toggleMobileNav" />
-      <IconLogo />
+      <RouterLink :to="{name: 'home'}"><IconLogo /></RouterLink>
       <Transition name="mobile-nav">
         <div v-show="mobileNav" class="bg-white fixed top-0 left-0 h-full w-2/3 z-30">
           <IconClose class="m-5 absolute right-0 transition-all duration-700 motion-reduce:transition-all" @click="toggleMobileNav" :class="{ '-rotate-180': !mobileNav }" />

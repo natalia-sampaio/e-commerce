@@ -15,10 +15,7 @@ const productsStore = useProductsStore();
         <span>Cart</span>
       </div>
     </div>
-    <div v-if="cartStore.count === 0" class="text-blue-dark-grayish text-center pt-16">
-      <span>Your cart is empty.</span>
-    </div>
-    <div v-else>
+    <div v-if="cartStore.cartItems > 0">
       <div class="text-blue-dark-grayish font-normal m-6 flex items-center" v-for="item in cartStore.items" :key="item.product.id">
         <img src="../assets/images/image-product-1-thumbnail.jpg" alt="" class="rounded h-14"/>
         <div class="m-3">
@@ -32,6 +29,9 @@ const productsStore = useProductsStore();
           Checkout
         </button>
       </div>
+    </div>
+    <div v-else class="text-blue-dark-grayish text-center pt-16">
+      <span>Your cart is empty.</span>
     </div>
   </div>
 </template>
