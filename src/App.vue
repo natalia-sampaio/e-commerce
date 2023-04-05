@@ -4,53 +4,61 @@ import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
 import IconClose from './components/icons/IconClose.vue';
-import { ref } from 'vue';
 import { useCartStore } from './stores/cart';
 import Cart from './components/Cart.vue';
-
-let collapsed = ref(true);
+import { Transition } from 'vue';
 
 const cartStore = useCartStore();
+</script>
 
-const router = useRouter();
-
-const goToCollections = () => {
-  collapsed = true;
-  router.push('/collections');
+<script>
+export default {
+    data() {
+        return {
+            mobileNav: false
+        };
+    },
+    methods: {
+        toggleMobileNav() {
+            this.mobileNav = !this.mobileNav;
+        }
+    }
 }
 </script>
 
 <template>
-  <header class="flex items-center justify-between">
-    <div class="flex items-center">
-      <IconMenu class="m-3" @click="collapsed = false" />
+  <header class="flex items-center justify-between transition-all duration-500">
+    <div class="flex items-center transition-all duration-500">
+      <IconMenu class="m-3 transition-all duration-700 motion-reduce:transition-all" :class="{'rotate-180': mobileNav}" @click="toggleMobileNav" />
       <IconLogo />
-      <div v-if="!collapsed">
-        <div class="bg-white opacity-100 fixed top-0 left-0 h-full w-2/3 z-20">
-          <IconClose class="m-5" @click="collapsed = true" />
+      <Transition name="mobile-nav">
+        <div v-show="mobileNav" class="bg-white fixed top-0 left-0 h-full w-2/3 z-30">
+          <IconClose class="m-5 absolute right-0 transition-all duration-700 motion-reduce:transition-all" @click="toggleMobileNav" :class="{ '-rotate-180': !mobileNav }" />
           <ul class="mx-5 my-10">
             <li class="my-5">
-              <button @click="goToCollections">Collections</button>
+              <RouterLink :to="{name: 'collections'}" @click="mobileNav = false">Collections</RouterLink>
             </li>
             <li class="my-5">
-              <button @click="collapsed = true">Men</button>
+              <button @click="mobileNav">Men</button>
             </li>
             <li class="my-5">
-              <button @click="collapsed = true">Women</button>
+              <button @click="mobileNav">Women</button>
             </li>
             <li class="my-5">
-              <button @click="collapsed = true">About</button>
+              <button @click="mobileNav">About</button>
             </li>
             <li class="my-5">
-              <button @click="collapsed = true">Contact</button>
+              <button @click="mobileNav">Contact</button>
             </li>
             <li class="my-5">
-              <button @click="collapsed = true">Logon or Signup</button>
+              <button @click="mobileNav">Logon or Signup</button>
             </li>
           </ul>
         </div>
-        <div class="bg-black opacity-70 fixed top-0 right-0 h-full w-1/3 z-20"></div>
-      </div>
+      </Transition>
+      <Transition name="light-box">
+        <div v-if="mobileNav" class="bg-black/70 fixed top-0 left-0 w-full h-full z-20" />
+      </Transition>
     </div>
     <div class="flex items-center">
       <button class="relative">
@@ -65,3 +73,29 @@ const goToCollections = () => {
 
   <RouterView />
 </template>
+
+<style>
+.mobile-nav-enter-active,
+.mobile-nav-leave-active {
+  transition: 2s ease all;
+}
+
+.mobile-nav-enter-from,
+.mobile-nav-leave-to {
+  transform: translateX(-250px);
+}
+
+.mobile-nav-enter-to {
+  transform: translateX(0);
+}
+
+.light-box-enter-from,
+.light-box-leave-to {
+  opacity: 0;
+}
+
+.light-box-enter-active,
+.light-box-leave-active {
+  transition: opacity 2s ease;
+}
+</style>
