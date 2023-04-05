@@ -22,7 +22,7 @@ const productsStore = useProductsStore();
           <h2 class="capitalize">{{ item.product.title }}</h2>
           <span >${{ productsStore.getDiscountedPrice(item.product.id) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ productsStore.getDiscountedPrice(item.product.id) * item.amount }}</span>
         </div>
-        <IconDelete />
+        <IconDelete @click="cartStore.deleteItem(item)" />
       </div>
       <div class="m-6">
         <button class="p-3 text-center text-white bg-orange-main rounded-lg w-full">
