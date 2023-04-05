@@ -39,10 +39,10 @@ export default {
               <RouterLink :to="{name: 'collections'}" @click="mobileNav = false">Collections</RouterLink>
             </li>
             <li class="my-5">
-              <button @click="mobileNav">Men</button>
+              <RouterLink :to="{name: 'men'}" @click="mobileNav = false">Men</RouterLink>
             </li>
             <li class="my-5">
-              <button @click="mobileNav">Women</button>
+              <RouterLink :to="{name: 'women'}" @click="mobileNav = false">Women</RouterLink>
             </li>
             <li class="my-5">
               <button @click="mobileNav">About</button>
