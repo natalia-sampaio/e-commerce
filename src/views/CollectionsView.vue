@@ -9,7 +9,7 @@ const productsStore = useProductsStore();
 
 <template>
     <SlideDownFade>
-        <div>
+        <div class="lg:mx-48 lg:flex lg:flex-wrap lg:justify-center">
             <ProductCard 
             v-for="product in productsStore.products"
             :key="product.id" 

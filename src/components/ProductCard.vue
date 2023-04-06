@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="bg-white mx-3 my-10 p-6 border-4 border-pink-600 shadow-customcard">
+    <div class="bg-white mx-3 my-10 p-6 border-4 border-pink-600 shadow-customcard max-w-sm">
         <div class="mb-6">
             <Banner />
         </div>

@@ -9,7 +9,7 @@ const productsStore = useProductsStore();
 </script>
 
 <template>
-  <div class="bg-white rounded-lg m-2 absolute top-14 right-0 left-0 z-10 min-h-[30%] shadow-2xl">
+  <div class="bg-white rounded-lg m-2 absolute top-14 lg:top-24 right-0 lg:right-60 left-0 lg:left-auto z-10 min-h-[30%] max-w-md min-w-[25%] shadow-2xl">
     <div class="border-b border-blue-grayish">
       <div class="p-6">
         <span>Cart</span>

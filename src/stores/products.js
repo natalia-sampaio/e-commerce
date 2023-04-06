@@ -5,7 +5,7 @@ export const useProductsStore = defineStore('products', {
         products: [
             {
                 id: 1,
-                title: "Fall limited edition sneakers",
+                title: "Fall edition sneakers",
                 description: "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
                 price: 250,
                 discountPercentage: 50,
@@ -25,7 +25,7 @@ export const useProductsStore = defineStore('products', {
                 rating: 4.69,
                 stock: 94,
                 brand: "Sneaker company",
-                category: "mens-shoes",
+                category: "womens-shoes",
                 thumbnail: "/@/assets/images/image-product-1-thumbnail.jpg",
                 images: []
             }
