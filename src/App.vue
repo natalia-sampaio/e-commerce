@@ -1,5 +1,5 @@
 <script setup>
-import { RouterView} from 'vue-router'
+import { RouterLink, RouterView} from 'vue-router'
 import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
@@ -45,10 +45,10 @@ export default {
               <RouterLink :to="{name: 'women'}" @click="mobileNav = false">Women</RouterLink>
             </li>
             <li class="my-5">
-              <button @click="mobileNav">About</button>
+              <RouterLink :to="{name: 'about'}" @click="mobileNav = false">About</RouterLink >
             </li>
             <li class="my-5">
-              <button @click="mobileNav">Contact</button>
+              <RouterLink :to="{name: 'contact'}" @click="mobileNav = false">Contact</RouterLink>
             </li>
             <li class="my-5">
               <button @click="mobileNav">Logon or Signup</button>
