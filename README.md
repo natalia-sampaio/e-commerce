@@ -21,7 +21,6 @@
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
@@ -75,7 +74,67 @@ npm run build
 
 ### Links
 <a href="https://github.com/natalia-sampaio"><img src="https://img.shields.io/badge/-Gitthub-0D1117?style=for-the-badge&logo=github&labelColor=333&textColor=0D1117"/></a>
-<a href="https://e-commerce-lake-eight.vercel.app/"><img src="https://img.shields.io/badge/-Deploy-0D1117?style=for-the-badge&logo=vercel&labelColor=0D1117&textColor=0D1117"/></a>
+<a href="https://e-commerce-lake-eight.vercel.app/"><img src="https://img.shields.io/badge/-Deploy-0D1117?style=for-the-badge&logo=vercel&labelColor=333&textColor=0D1117"/></a>
+
+## My process
+
+### Built with
+- Vue.js 3
+- TailwindCSS
+- Responsive layout
+- Mobile first
+
+### What I learned
+#### Week 1:
+I used Vue's built in component Transitions for the first time to create a better user experience.
+
+Reusable transition for the pages when they are loaded, it is reausable because I abstracted it to component named *SlideDownFade.Vue*:
+```html
+<script>
+import { Transition } from 'vue';
+</script>
+
+<template>
+    <Transition name="slide-down-fade" appear>
+        <slot></slot>
+    </Transition>
+</template>
+
+<style>
+.slide-down-fade-enter-from {
+    opacity: 0;
+    transform: translateY(-250px);
+}
+
+.slide-down-fade-enter-active {
+    transition: all 2s ease;
+}
+</style>
+```
+
+Here is *SlideDownFade.Vue* being used:
+```html
+<template>
+    <SlideDownFade>
+        <div class="lg:mx-8 lg:flex lg:flex-wrap lg:justify-center">
+            <div>
+                <ProductCard v-for="product in mensShoes" 
+                :key="product.id" 
+                :brandName="product.brand"
+                :productName="product.title" 
+                :finalCost="productsStore.getDiscountedPrice(product.id)"
+                :discount="product.discountPercentage" 
+                :originalPrice="product.price" 
+                :product="product" />
+            </div>
+        </div>
+    </SlideDownFade>
+</template>
+```
+### Useful resources
+- [Vue.js 3 Animations & Transitions Tutorial](https://www.koderhq.com/tutorial/vue/animation/) - This tutorial from KoderHQ helped me understand the basics of Transitions/TransitionGroups and how they work.
+- [John Komarnicki](https://www.youtube.com/@JohnKomarnicki) - John's youtube channel is rich with valuable content and he's a great communicator. I strongly encourage anyone that wants to take their Vue.js development skills to the next level. 
+
 
 ## Author
 
