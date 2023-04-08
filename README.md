@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Status](https://img.shields.io/badge/Status-week%201/3-0D1117?style=for-the-badge&labelColor=339933)&nbsp;
+![Status](https://img.shields.io/badge/Status-week%202/3-0D1117?style=for-the-badge&labelColor=6be9ff)&nbsp;
 ![HTML 5](https://img.shields.io/badge/-HTML-0D1117?style=for-the-badge&logo=html5&logoColor=f45430&labelColor=0D1117)&nbsp;
 ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-0D1117?style=for-the-badge&logo=tailwindcss&logoColor=1572B6&labelColor=0D1117)&nbsp;
 ![Vue.js](https://img.shields.io/badge/-Vue.js-0D1117?style=for-the-badge&logo=vue.js&labelColor=0D1117)&nbsp;
@@ -16,13 +16,13 @@
 - [Overview](#overview)
   - [Description](#description)
   - [Project Setup](#project-setup)
-<!--   - [Screenshots](#screenshot)
-  - [Links](#links) -->
-<!-- - [My process](#my-process)
+  - [Screenshots](#screenshots)
+  - [Links](#links)
+- [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources) -->
+  - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
@@ -38,7 +38,7 @@ This project will be divided in three weeks:
     - Shopping cart with state management;
     - Product state management;
     - Transitions and animations.
-- Week 2:
+- **Week 2:**
     - Refactor last week's work;
     - Use LocalStorage for cart data persistance while in guest view;
     - Use [DummyJson API](https://dummyjson.com/docs/products) to feed content to the page;
@@ -71,7 +71,11 @@ npm run dev
 ```sh
 npm run build
 ```
+### Screenshots
 
+### Links
+<a href="https://github.com/natalia-sampaio"><img src="https://img.shields.io/badge/-Gitthub-0D1117?style=for-the-badge&logo=github&labelColor=333&textColor=0D1117"/></a>
+<a href="https://e-commerce-lake-eight.vercel.app/"><img src="https://img.shields.io/badge/-Deploy-0D1117?style=for-the-badge&logo=vercel&labelColor=0D1117&textColor=0D1117"/></a>
 
 ## Author
 
