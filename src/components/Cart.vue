@@ -16,11 +16,13 @@ const productsStore = useProductsStore();
       </div>
     </div>
     <div v-if="cartStore.cartItems > 0">
-      <div class="text-blue-dark-grayish font-normal m-6 flex items-center" v-for="item in cartStore.items" :key="item.product.id">
-        <img src="../assets/images/image-product-1-thumbnail.jpg" alt="" class="rounded h-14"/>
-        <div class="m-3">
-          <h2 class="capitalize">{{ item.product.title }}</h2>
-          <span >${{ productsStore.getDiscountedPrice(item.product.id) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ productsStore.getDiscountedPrice(item.product.id) * item.amount }}</span>
+      <div class="text-blue-dark-grayish font-normal m-6 flex justify-between items-center" v-for="item in cartStore.items" :key="item.product.id">
+        <div class="flex">
+          <img src="../assets/images/image-product-1-thumbnail.jpg" alt="" class="rounded h-14"/>
+          <div class="m-3">
+            <h2 class="capitalize">{{ item.product.title }}</h2>
+            <span >${{ productsStore.getDiscountedPrice(item.product.id) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ productsStore.getDiscountedPrice(item.product.id) * item.amount }}</span>
+          </div>
         </div>
         <IconDelete @click="cartStore.deleteItem(item)" />
       </div>
