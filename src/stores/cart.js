@@ -24,6 +24,13 @@ export const useCartStore = defineStore('cart', {
     },
     deleteItem(product) {
       this.items.splice(this.items.findIndex(element => element.id === product.id), 1)
+    },
+    getDiscountedPrice(id) {
+      const product = this.items.find(element => element.id === id);
+
+      const discountedPrice = product.discountPercentage > 0.0 ? product.price - ((product.price / 100) * product.discountPercentage) : product.price;
+
+      return discountedPrice.toFixed(2);
     }
   }
 })

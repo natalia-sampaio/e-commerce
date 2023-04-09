@@ -1,23 +1,39 @@
 <script setup>
-import { computed } from '@vue/reactivity';
 import ProductCard from '../components/ProductCard.vue';
 import SlideDownFade from '../components/SlideDownFade.vue';
-import { useProductsStore } from '../stores/products';
+import { getDiscountedPrice, getWomensShoes } from '../services/products';
 
-const productsStore = useProductsStore();
+</script>
 
-const womensShoes = computed(() => {
-    return productsStore.products.filter((product) => product.category === 'womens-shoes')
-})
+<script>
+export default {
+    data() {
+        return {
+            womensShoes: [],
+            getDiscountedPrice: getDiscountedPrice
+        };
+    },
+    async beforeMount() {
+        this.womensShoes = await getWomensShoes();
+    }
+}
 </script>
 
 <template>
     <SlideDownFade>
-        <div class="lg:mx-8 lg:flex lg:flex-wrap lg:justify-center">
-            <div>
-                <ProductCard v-for="product in womensShoes" :key="product.id" :brandName="product.brand"
-                    :productName="product.title" :finalCost="productsStore.getDiscountedPrice(product.id)"
-                    :discount="product.discountPercentage" :originalPrice="product.price" :product="product" />
+        <div class="lg:mx-8">
+            <!-- <div v-if="loading" class="text-center">
+                Loading products...
+            </div> -->
+            <div class="lg:flex lg:flex-wrap lg:justify-center">
+                <ProductCard v-for="product in womensShoes" 
+                    :key="product.id" 
+                    :brandName="product.brand"
+                    :productName="product.title" 
+                    :finalCost="getDiscountedPrice(product.id, womensShoes)"
+                    :discount="product.discountPercentage" 
+                    :originalPrice="product.price" 
+                    :product="product" />
             </div>
         </div>
     </SlideDownFade>

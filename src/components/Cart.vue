@@ -1,12 +1,9 @@
 <script setup>
 import { useCartStore } from '../stores/cart';
-import { useProductsStore } from '../stores/products';
 import IconDelete from './icons/IconDelete.vue';
 import SlideDownFade from './SlideDownFade.vue';
 
 const cartStore = useCartStore();
-
-const productsStore = useProductsStore();
 </script>
 
 <template>
@@ -23,7 +20,7 @@ const productsStore = useProductsStore();
             <img src="../assets/images/image-product-1-thumbnail.jpg" alt="" class="rounded h-14"/>
             <div class="m-3">
               <h2 class="capitalize">{{ item.product.title }}</h2>
-              <span >${{ productsStore.getDiscountedPrice(item.product.id) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ productsStore.getDiscountedPrice(item.product.id) * item.amount }}</span>
+              <span >${{ cartStore.getDiscountedPrice(item.product.id) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ cartStore.getDiscountedPrice(item.product.id) * item.amount }}</span>
             </div>
           </div>
           <IconDelete @click="cartStore.deleteItem(item)" />

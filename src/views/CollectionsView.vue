@@ -1,25 +1,42 @@
 <script setup>
 import ProductCard from '../components/ProductCard.vue';
 import SlideDownFade from '../components/SlideDownFade.vue';
-import { useProductsStore } from '../stores/products';
+import { getDiscountedPrice, getMensShoes, getWomensShoes } from '../services/products';
 
-const productsStore = useProductsStore();
+</script>
 
+<script>
+export default {
+    data() {
+        return {
+            products: [],
+            getDiscountedPrice: getDiscountedPrice
+        };
+    },
+    async beforeMount() {
+        this.products.push(...await getMensShoes());
+        this.products.push(...await getWomensShoes());
+    }
+}
 </script>
 
 <template>
     <SlideDownFade>
-        <div class="lg:mx-48 lg:flex lg:flex-wrap lg:justify-center">
-            <ProductCard 
-            v-for="product in productsStore.products"
-            :key="product.id" 
-            :brandName="product.brand"
-            :productName="product.title"
-            :finalCost="productsStore.getDiscountedPrice(product.id)"
-            :discount="product.discountPercentage"
-            :originalPrice="product.price"
-            :product="product"
-            />
+        <div class="lg:mx-48">
+            <div v-if="loading" class="text-center">
+                Loading products...
+            </div>
+            <div class="lg:flex lg:flex-wrap lg:justify-center" v-else>
+                <ProductCard v-for="product in products"
+                    :key="product.id" 
+                    :brandName="product.brand"
+                    :productName="product.title"
+                    :finalCost="getDiscountedPrice(product.id, products)"
+                    :discount="product.discountPercentage"
+                    :originalPrice="product.price"
+                    :product="product"
+                />
+            </div>
         </div>
     </SlideDownFade>
 </template>
