@@ -4,6 +4,12 @@ import IconDelete from './icons/IconDelete.vue';
 import SlideDownFade from './SlideDownFade.vue';
 
 const cartStore = useCartStore();
+
+const discountedPrice = (product) => {
+  const discountedPrice = product.discountPercentage > 0.0 ? product.price - ((product.price / 100) * product.discountPercentage) : product.price;
+
+  return discountedPrice.toFixed(2);
+}
 </script>
 
 <template>
@@ -20,7 +26,7 @@ const cartStore = useCartStore();
             <img src="../assets/images/image-product-1-thumbnail.jpg" alt="" class="rounded h-14"/>
             <div class="m-3">
               <h2 class="capitalize">{{ item.product.title }}</h2>
-              <span >${{ cartStore.getDiscountedPrice(item.product.id) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ cartStore.getDiscountedPrice(item.product.id) * item.amount }}</span>
+              <span >${{ discountedPrice(item.product) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ discountedPrice(item.product)*item.amount }}</span>
             </div>
           </div>
           <IconDelete @click="cartStore.deleteItem(item)" />
