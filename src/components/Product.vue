@@ -9,13 +9,14 @@ defineProps({
     productName: "",
     productDescription: "",
     finalCost: Number,
-    cost: Number
+    cost: Number,
+    images: Array
 })
 </script>
 
 <template>
     <div class="lg:mx-8 lg:flex lg:items-center">
-        <Banner />
+        <Banner :images="images" class="lg:w-1/3" />
         <div class="lg:mx-20 lg:my-10 lg:grid lg:justify-center">
             <h2 class="text-sm text-orange-main uppercase m-6 lg:my-0">{{ brandName }}</h2>
             <div class="m-6">

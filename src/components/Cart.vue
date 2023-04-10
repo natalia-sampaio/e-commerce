@@ -23,7 +23,7 @@ const discountedPrice = (product) => {
       <div v-if="cartStore.cartItems > 0">
         <div class="text-blue-dark-grayish font-normal m-6 flex justify-between items-center" v-for="item in cartStore.items" :key="item.product.id">
           <div class="flex">
-            <img src="../assets/images/image-product-1-thumbnail.jpg" alt="" class="rounded h-14"/>
+            <img :src="item.product.thumbnail" alt="" class="rounded h-14"/>
             <div class="m-3">
               <h2 class="capitalize">{{ item.product.title }}</h2>
               <span >${{ discountedPrice(item.product) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ discountedPrice(item.product)*item.amount }}</span>

@@ -6,7 +6,7 @@ import ItemsInput from '../components/ItemsInput.vue'; */
 import IconCart from '../components/icons/IconCart.vue';
 import SlideDownFade from '../components/SlideDownFade.vue';
 import { useCartStore } from '../stores/cart.js';
-import { getFeaturedShoes, getDiscountedPrice } from '../services/products.js';
+import { getFeaturedShoes, getDiscountedPrice, getImages } from '../services/products.js';
 const cartStore = useCartStore();
 
 </script>
@@ -35,6 +35,7 @@ export default {
       v-model:productName="product.title"
       v-model:productDescription="product.description"
       :finalCost="getDiscountedPrice(product.id, featured)"
+      :images="getImages(product.id, featured)"
       >
         <template #discount v-if="product.discountPercentage > 0">
           <span class="bg-orange-pale text-orange-main rounded px-2 py-[0.1rem]">{{ product.discountPercentage }}%</span>

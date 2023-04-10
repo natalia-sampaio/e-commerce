@@ -1,7 +1,7 @@
 <script setup>
 import ProductCard from '../components/ProductCard.vue';
 import SlideDownFade from '../components/SlideDownFade.vue';
-import { getDiscountedPrice, getWomensShoes } from '../services/products';
+import { getDiscountedPrice, getImages, getWomensShoes } from '../services/products';
 
 </script>
 
@@ -33,7 +33,8 @@ export default {
                     :finalCost="getDiscountedPrice(product.id, womensShoes)"
                     :discount="product.discountPercentage" 
                     :originalPrice="product.price" 
-                    :product="product" />
+                    :product="product"
+                    :images="getImages(product.id, womensShoes)" />
             </div>
         </div>
     </SlideDownFade>

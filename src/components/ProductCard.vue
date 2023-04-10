@@ -11,14 +11,15 @@ defineProps({
     finalCost: Number,
     discount: Number,
     originalPrice: Number ,
-    product: Object
+    product: Object,
+    images: Array
 });
 </script>
 
 <template>
     <div class="bg-white mx-3 my-10 p-6 border-4 border-pink-600 shadow-customcard max-w-sm">
         <div class="mb-6">
-            <Banner />
+            <Banner :images="images" />
         </div>
         <span class="text-orange-main text-sm uppercase">{{ brandName }}</span>
         <h2 class="text-2xl capitalize">{{ productName }}</h2>

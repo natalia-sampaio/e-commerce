@@ -28,3 +28,11 @@ export function getDiscountedPrice(id, products) {
 
     return discountedPrice.toFixed(2);
 }
+
+export function getImages(id, products) {
+    const product = products.find(element => element.id === id);
+
+    const images = product.images;
+    
+    return images;
+}
