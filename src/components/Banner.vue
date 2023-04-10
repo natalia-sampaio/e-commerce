@@ -47,6 +47,7 @@ export default {
             <img src="../assets/images/image-product-3-thumbnail.jpg" alt="" :class="show == 2 ? activeThumbnail : 'rounded-xl w-1/5 hover:cursor-pointer'" @click="show = 2" />
             <img src="../assets/images/image-product-4-thumbnail.jpg" alt="" :class="show == 3 ? activeThumbnail : 'rounded-xl w-1/5 hover:cursor-pointer'" @click="show = 3" />
         </div>
+        </div>
         <IconNext class="absolute m-3 top-1/3 right-0 lg:hidden" @click="show == 3 ? show = 0 : show ++" />
     </div>
 </template>
