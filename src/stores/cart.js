@@ -22,8 +22,8 @@ export const useCartStore = defineStore('cart', {
         this.items.push({product, amount: 1})
       }
     },
-    deleteItem(product) {
-      const productToBeDeleted = this.items.find(element => element.product.id === product.id)    
+    deleteItem(id) {
+      const productToBeDeleted = this.items.findIndex(element => element.product.id === id)
       this.items.splice(productToBeDeleted, 1)
     }
   }
