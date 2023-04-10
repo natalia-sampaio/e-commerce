@@ -21,7 +21,7 @@ const discountedPrice = (product) => {
         </div>
       </div>
       <div v-if="cartStore.cartItems > 0">
-        <div class="text-blue-dark-grayish font-normal m-6 flex justify-between items-center" v-for="item in cartStore.items" :key="item.product.id">
+        <div v-for="item in cartStore.items" :key="item.product.id" class="text-blue-dark-grayish font-normal m-6 flex justify-between items-center">
           <div class="flex">
             <img :src="item.product.thumbnail" alt="" class="rounded h-14"/>
             <div class="m-3">
@@ -29,7 +29,7 @@ const discountedPrice = (product) => {
               <span >${{ discountedPrice(item.product) }} </span><span> x {{ item.amount }} </span><span class="font-bold text-black"> ${{ discountedPrice(item.product)*item.amount }}</span>
             </div>
           </div>
-          <IconDelete @click="cartStore.deleteItem(item)" />
+          <IconDelete @click="cartStore.deleteItem(item.product.id)" />
         </div>
         <div class="m-6">
           <button class="p-3 text-center text-white bg-orange-main rounded-lg w-full">

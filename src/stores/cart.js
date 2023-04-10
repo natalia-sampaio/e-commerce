@@ -23,7 +23,8 @@ export const useCartStore = defineStore('cart', {
       }
     },
     deleteItem(product) {
-      this.items.splice(this.items.findIndex(element => element.product.id === product.id), 1)
+      const productToBeDeleted = this.items.find(element => element.product.id === product.id)    
+      this.items.splice(productToBeDeleted, 1)
     }
   }
 })
