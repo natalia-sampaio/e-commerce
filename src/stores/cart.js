@@ -1,10 +1,11 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import { useLocalStorage } from '@vueuse/core';
 
 export const useCartStore = defineStore('cart', {
   state: () => {
     return {
       toggleCart: false,
-      items: []
+      items: useLocalStorage('cart', [])
     }
   },
   getters: {
