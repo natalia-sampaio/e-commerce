@@ -5,9 +5,9 @@ import SlideDownFade from '../components/SlideDownFade.vue';
 
 <template>
     <SlideDownFade name="slide-down-fade" appear>
-        <div class="bg-orange-pale w-screen h-screen text-center lg:flex lg:-mt-20">
-            <h1 class="text-3xl py-7 text-orange-pale bg-orange-main lg:pl-48 lg:pr-24 lg:pt-12">About Me</h1>
-            <div class="lg:mx-auto">
+        <div class="bg-orange-pale w-screen h-screen text-center xl:flex xl:-mt-20">
+            <h1 class="text-3xl py-7 text-orange-pale bg-orange-main xl:pl-48 xl:pr-24 xl:pt-12">About Me</h1>
+            <div class="xl:mx-auto">
                 <div class="bg-white m-3 rounded-2xl grid max-w-sm">
                     <div class="m-4 h-80 overflow-hidden shadow-xl border-2 border-pink-600">
                         <img src="@/assets/images/profile-pic.jpeg" alt="creator profile picture"/>

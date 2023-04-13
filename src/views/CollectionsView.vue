@@ -22,11 +22,11 @@ export default {
 
 <template>
     <SlideDownFade>
-        <div class="lg:mx-48">
+        <div class="xl:mx-48">
             <div v-if="loading" class="text-center">
                 Loading products...
             </div>
-            <div class="lg:flex lg:flex-wrap lg:justify-center" v-else>
+            <div class="xl:flex xl:flex-wrap xl:justify-center" v-else>
                 <ProductCard v-for="product in products"
                     :key="product.id" 
                     :brandName="product.brand"

@@ -27,7 +27,7 @@ export default {
 
 <template>
   <SlideDownFade>
-    <main class="lg:mx-40">
+    <main class="xl:mx-40">
       <Product 
       v-for="product in featured" 
       :key="product.id"

@@ -63,7 +63,7 @@ const submitForm = async () => {
 
 <template>
     <SlideDownFade>
-        <div class="border-2 border-pink-600 rounded-br-3xl grid grid-cols-2 p-6 lg:mx-48 mb-20 h-[65vh]">
+        <div class="border-2 border-pink-600 rounded-br-3xl grid grid-cols-2 p-6 xl:mx-48 mb-20 h-[65vh]">
             <div class="self-center text-center">                
                 <h2 class="text-2xl">Sign Up</h2>
                 <FormItem>

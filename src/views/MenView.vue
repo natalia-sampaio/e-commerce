@@ -20,11 +20,11 @@ export default {
 
 <template>
     <SlideDownFade>
-        <div class="lg:mx-8 ">
+        <div class="xl:mx-8 ">
             <!-- <div v-if="loading" class="text-center">
                 Loading products...
             </div> -->
-            <div class="lg:flex lg:flex-wrap lg:justify-center">
+            <div class="xl:flex xl:flex-wrap xl:justify-center">
                 <ProductCard v-for="product in mensShoes" 
                     :key="product.id" 
                     :brandName="product.brand"

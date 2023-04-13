@@ -14,7 +14,7 @@ const discountedPrice = (product) => {
 
 <template>
   <SlideDownFade>
-    <div class="bg-white rounded-lg m-2 absolute top-14 lg:top-24 right-0 lg:right-60 left-0 lg:left-auto z-10 min-h-[30%] max-w-md min-w-[25%] shadow-2xl">
+    <div class="bg-white rounded-lg m-2 absolute top-14 xl:top-24 right-0 xl:right-60 left-0 xl:left-auto z-10 min-h-[30%] max-w-md min-w-[25%] shadow-2xl">
       <div class="border-b border-blue-grayish">
         <div class="p-6">
           <span>Cart</span>
