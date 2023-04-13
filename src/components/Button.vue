@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-    <button class="">
+    <button class="bg-orange-main text-white p-3 rounded-xl w-full">
         <slot name="icon"></slot>
         {{ name }}
     </button>

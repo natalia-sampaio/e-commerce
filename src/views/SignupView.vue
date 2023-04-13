@@ -2,8 +2,9 @@
 import SlideDownFade from '../components/SlideDownFade.vue';
 import FormItem from '../components/FormItem.vue';
 import BaseInput from '../components/BaseInput.vue';
+import Button from '../components/Button.vue';
 import useVuelidate from '@vuelidate/core';
-import { required, minLength, email } from '@vuelidate/validators'
+import { required, minLength, email, sameAs } from '@vuelidate/validators'
 import { reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
@@ -31,7 +32,7 @@ const rules = computed(() => {
         },
         confirmPassword: {
             required,
-            minLength: minLength(8)
+            sameAs: sameAs(formData.password)
         }
     }
 });
@@ -64,16 +65,29 @@ const submitForm = async () => {
 <template>
     <SlideDownFade>
         <div class="border-2 border-pink-600 rounded-br-3xl grid grid-cols-2 p-6 xl:mx-48 mb-20 h-[65vh]">
-            <div class="self-center text-center">                
-                <h2 class="text-2xl">Sign Up</h2>
+            <div class="self-center text-center mx-10">                
+                <h2 class="text-2xl mb-5">Sign Up</h2>
                 <FormItem>
                     <template #label>Name</template>
                     <template #error v-for="error in v$.name.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
-                    <BaseInput type="text" placeholder="e.g. casimiro" aria-label="name number input" v-model="formData.name" />
+                    <BaseInput type="text" placeholder="e.g. Casimiro Silva" aria-label="name input" v-model="formData.name" />
                 </FormItem>
-                <div class="">
-                    <button @click="submitForm" class="bg-orange-main text-orange-pale" :class="{ shake: warn }">Submit</button>
-                </div>
+                <FormItem>
+                    <template #label>E-mail</template>
+                    <template #error v-for="error in v$.email.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
+                    <BaseInput type="text" placeholder="e.g. casimiro.silva@email.com" aria-label="email input" v-model="formData.email" />
+                </FormItem>
+                <FormItem>
+                    <template #label>Password</template>
+                    <template #error v-for="error in v$.password.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
+                    <BaseInput type="text" placeholder="" aria-label="password input" v-model="formData.password" />
+                </FormItem>
+                <FormItem>
+                    <template #label>Confirm Password</template>
+                    <template #error v-for="error in v$.confirmPassword.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
+                    <BaseInput type="text" placeholder="" aria-label="confirm password input" v-model="formData.confirmPassword" />
+                </FormItem>
+                <Button @click="submitForm" :class="{ shake: warn }" name="Submit" class="mt-5"/>
             </div>
             <div class="self-center">
                 <img src="../assets/images/image-product-1.jpg" alt="" class="rounded-tl-3xl rounded-br-3xl">
@@ -109,5 +123,4 @@ const submitForm = async () => {
      60% {
          transform: translate3d(4px, 0, 0);
      }
- }
-</style>
+ }</style>
