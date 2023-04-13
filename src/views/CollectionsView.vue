@@ -26,7 +26,7 @@ export default {
             <div v-if="loading" class="text-center">
                 Loading products...
             </div>
-            <div class="xl:flex xl:flex-wrap xl:justify-center" v-else>
+            <div class="flex flex-wrap justify-center" v-else>
                 <ProductCard v-for="product in products"
                     :key="product.id" 
                     :brandName="product.brand"

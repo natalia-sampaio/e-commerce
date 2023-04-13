@@ -64,7 +64,15 @@ const submitForm = async () => {
 
 <template>
     <SlideDownFade>
-        <div class="border-2 border-pink-600 rounded-br-3xl grid grid-cols-2 p-6 xl:mx-48 mb-20 h-[65vh]">
+        <div class="
+            border-2 border-pink-600 
+            rounded-tl-3xl rounded-br-3xl 
+            grid xl:grid-cols-2 
+            p-6 
+            mt-10
+            mx-4 mobile:mx-auto xl:mx-48 mb-20 
+            h-[65vh] 
+            max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-none">
             <div class="self-center text-center mx-10">                
                 <h2 class="text-2xl mb-5">Sign Up</h2>
                 <FormItem>
@@ -89,38 +97,27 @@ const submitForm = async () => {
                 </FormItem>
                 <Button @click="submitForm" :class="{ shake: warn }" name="Submit" class="mt-5"/>
             </div>
-            <div class="self-center">
+            <div class="self-center hidden xl:block">
                 <img src="../assets/images/image-product-1.jpg" alt="" class="rounded-tl-3xl rounded-br-3xl">
             </div>
         </div>
     </SlideDownFade>    
 </template>
 
-<style scoped> .shake {
+<style scoped>
+.shake {
      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
      transform: translate3d(0, 0, 0);
  }
 
  @keyframes shake {
 
-     10%,
-     90% {
-         transform: translate3d(-1px, 0, 0);
-     }
+     10%, 90% { transform: translate3d(-1px, 0, 0); }
 
-     20%,
-     80% {
-         transform: translate3d(2px, 0, 0);
-     }
+     20%, 80% { transform: translate3d(2px, 0, 0); }
 
-     30%,
-     50%,
-     70% {
-         transform: translate3d(-4px, 0, 0);
-     }
+     30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
 
-     40%,
-     60% {
-         transform: translate3d(4px, 0, 0);
-     }
- }</style>
+     40%, 60% { transform: translate3d(4px, 0, 0); }
+ }
+ </style>

@@ -24,7 +24,7 @@ export default {
             <!-- <div v-if="loading" class="text-center">
                 Loading products...
             </div> -->
-            <div class="xl:flex xl:flex-wrap xl:justify-center">
+            <div class="flex flex-wrap justify-center">
                 <ProductCard v-for="product in mensShoes" 
                     :key="product.id" 
                     :brandName="product.brand"
