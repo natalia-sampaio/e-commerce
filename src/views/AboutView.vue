@@ -1,10 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import SlideDownFade from '../components/SlideDownFade.vue';
 </script>
 
 <template>
-    <SlideDownFade name="slide-down-fade" appear>
         <div class="bg-orange-pale w-screen h-screen text-center xl:flex xl:-mt-20">
             <h1 class="text-3xl py-7 text-orange-pale bg-orange-main xl:pl-48 xl:pr-24 xl:pt-12">About Me</h1>
             <div class="xl:mx-auto">
@@ -29,5 +27,4 @@ import SlideDownFade from '../components/SlideDownFade.vue';
                 </div>
             </div>
         </div>
-    </SlideDownFade>
 </template>

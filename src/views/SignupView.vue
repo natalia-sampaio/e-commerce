@@ -1,5 +1,4 @@
 <script setup>
-import SlideDownFade from '../components/SlideDownFade.vue';
 import FormItem from '../components/FormItem.vue';
 import BaseInput from '../components/BaseInput.vue';
 import Button from '../components/Button.vue';
@@ -63,7 +62,6 @@ const submitForm = async () => {
 </script>
 
 <template>
-    <SlideDownFade>
         <div class="
             border-2 border-pink-600 
             rounded-tl-3xl rounded-br-3xl 
@@ -100,8 +98,7 @@ const submitForm = async () => {
             <div class="self-center hidden xl:block">
                 <img src="../assets/images/image-product-1.jpg" alt="" class="rounded-tl-3xl rounded-br-3xl">
             </div>
-        </div>
-    </SlideDownFade>    
+        </div> 
 </template>
 
 <style scoped>

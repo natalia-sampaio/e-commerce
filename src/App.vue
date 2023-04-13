@@ -8,6 +8,7 @@ import Cart from './components/Cart.vue';
 import { Transition } from 'vue';
 import NavLinks from './components/NavLinks.vue';
 import IconClose from './components/icons/IconClose.vue';
+import SlideDownFade from './components/SlideDownFade.vue';
 
 const cartStore = useCartStore();
 </script>
@@ -99,7 +100,9 @@ export default {
   
   <Cart v-if="cartStore.toggleCart" />
 
-  <RouterView />
+  <SlideDownFade>
+    <RouterView />
+  </SlideDownFade>
 </template>
 
 <style>

@@ -41,7 +41,7 @@ export default {
     <div class="h-1/4 relative">
         <IconPrevious class="absolute m-3 top-1/3 lg:hidden" @click="show == 0 ? show = 3 :show --" />
         <Transition name="carousel" mode="out-in">
-            <img class="xl:rounded-xl mx-auto" :src="image(show)" alt="" />
+            <img class="xl:rounded-xl mx-auto" :src="image(show)" :key="show" alt="" />
         </Transition>
         <div v-if="desktop" class="flex justify-between items-center mt-8">
             <div v-for="(image, index) in images" class="w-1/6">
