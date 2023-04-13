@@ -54,7 +54,7 @@ const submitForm = async () => {
             name: formData.name,
             email: formData.email
         })
-        router.push('/')
+        router.push('/user-profile')
     } else {
         warn.value = true;
         setTimeout(() => {
