@@ -1,13 +1,15 @@
 <script setup>
 import FormItem from '../components/FormItem.vue';
 import BaseInput from '../components/BaseInput.vue';
+import IconEye from '../components/icons/IconEye.vue';
+import IconClosedEye from '../components/icons/IconClosedEye.vue';
 import Button from '../components/Button.vue';
 import useVuelidate from '@vuelidate/core';
 import { required, minLength, email, sameAs } from '@vuelidate/validators'
 import { reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import { useUserStore } from '../stores/user';
+import { useUserStore } from '../stores/user.js';
 
 const store = useUserStore();
 
@@ -60,6 +62,12 @@ const submitForm = async () => {
         router.push('/sign-up')
     }
 }
+
+const showPassword = ref(false);
+
+const toggleShowPassword = () => {
+    showPassword.value = !showPassword.value;
+}
 </script>
 
 <template>
@@ -70,7 +78,7 @@ const submitForm = async () => {
             p-6 
             mt-10
             mx-4 mobile:mx-auto xl:mx-48 mb-20 
-            h-[65vh] 
+            
             max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-none">
             <div class="self-center text-center mx-10">                
                 <h2 class="text-2xl mb-5">Sign Up</h2>
@@ -87,12 +95,24 @@ const submitForm = async () => {
                 <FormItem>
                     <template #label>Password</template>
                     <template #error v-for="error in v$.password.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
-                    <BaseInput type="text" placeholder="" aria-label="password input" v-model="formData.password" />
+                    <div class="flex items-center">
+                        <BaseInput :type="!showPassword ? 'password' : 'text'" placeholder="" aria-label="password input" v-model="formData.password" class="w-full" />
+                        <button @click.prevent="toggleShowPassword">
+                            <IconEye v-if="!showPassword" :width="'24px'" class="-ml-10" />
+                            <IconClosedEye v-else :width="'24px'" class="-ml-10" />
+                        </button>
+                    </div>
                 </FormItem>
                 <FormItem>
                     <template #label>Confirm Password</template>
                     <template #error v-for="error in v$.confirmPassword.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
-                    <BaseInput type="text" placeholder="" aria-label="confirm password input" v-model="formData.confirmPassword" />
+                    <div class="flex items-center">
+                        <BaseInput :type="!showPassword ? 'password' : 'text'"  placeholder="" aria-label="confirmPassword input" v-model="formData.confirmPassword" class="w-full" />
+                        <button @click.prevent="toggleShowPassword">
+                            <IconEye v-if="!showPassword" :width="'24px'" class="-ml-10" />
+                            <IconClosedEye v-else :width="'24px'" class="-ml-10" />
+                        </button>
+                    </div>
                 </FormItem>
                 <Button @click="submitForm" :class="{ shake: warn }" name="Submit" class="mt-5"/>
             </div>
