@@ -3,10 +3,11 @@ import { RouterLink, RouterView} from 'vue-router'
 import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
-import IconClose from './components/icons/IconClose.vue';
 import { useCartStore } from './stores/cart';
 import Cart from './components/Cart.vue';
 import { Transition } from 'vue';
+import MobileNav from './components/MobileNav.vue';
+import DesktopNav from './components/DesktopNav.vue';
 
 const cartStore = useCartStore();
 </script>
@@ -25,17 +26,17 @@ export default {
             this.mobileNav = !this.mobileNav;
         },
         checkScreen() {
-          this.windowWidth = window.innerWidth;
-          if(this.windowWidth>= 1280) {
-            this.desktop = true;
-            return
-          }
-          this.desktop = false;
+            this.windowWidth = window.innerWidth;
+            if (this.windowWidth >= 1280) {
+                this.desktop = true;
+                return;
+            }
+            this.desktop = false;
         }
     },
     created() {
-      window.addEventListener('resize', this.checkScreen);
-      this.checkScreen();
+        window.addEventListener("resize", this.checkScreen);
+        this.checkScreen();
     }
 }
 </script>
@@ -45,64 +46,9 @@ export default {
     <div class="flex items-center transition-all duration-500">
       <IconMenu class="m-3 transition-all duration-700 motion-reduce:transition-all xl:hidden" :class="{'rotate-180': mobileNav}" @click="toggleMobileNav" />
       <RouterLink :to="{name: 'home'}"><IconLogo /></RouterLink>
-      <div v-if="desktop" class="w-full">
-        <ul class="mx-5 my-10 text-blue-dark-grayish font-normal flex justify-evenly">
-          <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark p-2">
-            <RouterLink :to="{ name: 'collections' }">Collections</RouterLink>
-          </li>
-          <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark p-2">
-            <RouterLink :to="{ name: 'men' }">Men</RouterLink>
-          </li>
-          <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark p-2">
-            <RouterLink :to="{ name: 'women' }">Women</RouterLink>
-          </li>
-          <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark p-2">
-            <RouterLink :to="{ name: 'about' }">About</RouterLink >
-            </li>
-            <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark p-2">
-              <RouterLink :to="{ name: 'contact' }">Contact</RouterLink>
-            </li>
-            <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark p-2">
-              <button>Sign in</button>
-            </li>
-            <li class="my-5 ml-10 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
-              <RouterLink :to="{ name: 'sign-up' }">Sign up</RouterLink>
-            </li>
-          </ul>
-        </div>
+      <DesktopNav v-if="desktop" />
       <Transition name="mobile-nav">
-        <div v-show="mobileNav" class="
-          bg-white 
-          fixed xl:relative 
-          top-0 left-0 
-          h-full xl:h-auto 
-          w-2/3 xl:w-full 
-          z-30 xl:z-0 ">
-          <IconClose class="m-5 absolute right-0 transition-all duration-700 motion-reduce:transition-all xl:hidden" @click="toggleMobileNav" :class="{ '-rotate-180': !mobileNav }" />
-          <ul class="mx-5 my-10 xl:text-blue-dark-grayish xl:font-normal xl:flex xl:justify-evenly">
-            <li class="my-5 xl:ml-10">
-              <RouterLink :to="{name: 'collections'}" @click="mobileNav = false">Collections</RouterLink>
-            </li>
-            <li class="my-5 xl:ml-10">
-              <RouterLink :to="{name: 'men'}" @click="mobileNav = false">Men</RouterLink>
-            </li>
-            <li class="my-5 xl:ml-10">
-              <RouterLink :to="{name: 'women'}" @click="mobileNav = false">Women</RouterLink>
-            </li>
-            <li class="my-5 xl:ml-10">
-              <RouterLink :to="{name: 'about'}" @click="mobileNav = false">About</RouterLink >
-            </li>
-            <li class="my-5 xl:ml-10">
-              <RouterLink :to="{name: 'contact'}" @click="mobileNav = false">Contact</RouterLink>
-            </li>
-            <li class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
-              <button>Sign in</button>
-            </li>
-            <li class="my-5 xl:ml-10">
-              <RouterLink :to="{name: 'sign-up'}">Sign up</RouterLink>
-            </li>
-          </ul>
-        </div>
+        <MobileNav v-show="mobileNav" :toggleMobileNav="toggleMobileNav" :mobile-nav="mobileNav"/>
       </Transition>
       <Transition name="light-box">
         <div v-if="mobileNav" class="bg-black/70 fixed top-0 left-0 w-full h-full z-20 xl:hidden" />
@@ -130,7 +76,7 @@ export default {
 
 .mobile-nav-enter-from,
 .mobile-nav-leave-to {
-  transform: translateX(-250px);
+  transform: translateX(-1024px);
 }
 
 .mobile-nav-enter-to {

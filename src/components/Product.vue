@@ -15,8 +15,8 @@ defineProps({
 </script>
 
 <template>
-    <div class="xl:mx-8 xl:flex xl:items-center">
-        <Banner :images="images" class="xl:w-1/3" />
+    <div class="xl:mx-8 xl:flex xl:items-center xl:justify-evenly">
+        <Banner :images="images" class="xl:w-1/2" />
         <div class="xl:mx-20 xl:my-10 xl:grid xl:justify-center">
             <h2 class="text-sm text-orange-main uppercase m-6 xl:my-0">{{ brandName }}</h2>
             <div class="m-6">

@@ -39,16 +39,16 @@ export default {
 
 <template>
     <div class="h-1/4 relative">
-        <IconPrevious class="absolute m-3 top-1/3 xl:hidden" @click="show == 0 ? show = 3 :show --" />
+        <IconPrevious class="absolute m-3 top-1/3 lg:hidden" @click="show == 0 ? show = 3 :show --" />
         <Transition name="carousel" mode="out-in">
-            <img class="xl:rounded-xl" :src="image(show)" alt="" />
+            <img class="xl:rounded-xl mx-auto" :src="image(show)" alt="" />
         </Transition>
         <div v-if="desktop" class="flex justify-between items-center mt-8">
             <div v-for="(image, index) in images" class="w-1/6">
                 <img :src="image" alt="" @click="show = index" class="rounded-xl hover:cursor-pointer"/>
             </div>
         </div>
-        <IconNext class="absolute m-3 top-1/3 right-0 xl:hidden" @click="show == 3 ? show = 0 : show ++" />
+        <IconNext class="absolute m-3 top-1/3 right-0 lg:hidden" @click="show == 3 ? show = 0 : show ++" />
     </div>
 </template>
 
