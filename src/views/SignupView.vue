@@ -7,6 +7,9 @@ import { required, minLength, email, sameAs } from '@vuelidate/validators'
 import { reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { useUserStore } from '../stores/user';
+
+const store = useUserStore();
 
 const formData = reactive({
     name: "",
@@ -46,9 +49,7 @@ const submitForm = async () => {
     if (result) {
         store.$patch({
             name: formData.name,
-            email: formData.email,
-            password: formData.password,
-            confirmPassword: formData.confirmPassword
+            email: formData.email
         })
         router.push('/')
     } else {
@@ -56,7 +57,7 @@ const submitForm = async () => {
         setTimeout(() => {
             warn.value = false
         }, 1500)
-        router.push('/')
+        router.push('/sign-up')
     }
 }
 </script>
