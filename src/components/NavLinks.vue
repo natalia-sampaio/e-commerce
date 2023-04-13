@@ -24,7 +24,7 @@ defineProps({
             <RouterLink :to="{ name: 'contact' }" @click="mobileNav = false">Contact</RouterLink>
         </li>
         <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
-            <button>Sign in</button>
+            <RouterLink :to="{ name: 'sign-in' }">Sign in</RouterLink>
         </li>
         <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
             <RouterLink :to="{ name: 'sign-up' }" @click="mobileNav = false">Sign up</RouterLink>

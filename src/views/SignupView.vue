@@ -10,6 +10,7 @@ import { reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useUserStore } from '../stores/user.js';
+import IconLogo from '../components/icons/IconLogo.vue';
 
 const store = useUserStore();
 
@@ -77,11 +78,10 @@ const toggleShowPassword = () => {
             grid xl:grid-cols-2 
             p-6 
             mt-10
-            mx-4 mobile:mx-auto xl:mx-48 mb-20 
-            
+            mx-4 mobile:mx-auto xl:mx-48 mb-20
             max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-none">
             <div class="self-center text-center mx-10">                
-                <h2 class="text-2xl mb-5">Sign Up</h2>
+                <h2 class="text-2xl font-normal mb-5 flex items-center justify-center">Sign up to <IconLogo class="mx-2" /></h2>
                 <FormItem>
                     <template #label>Name</template>
                     <template #error v-for="error in v$.name.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
@@ -121,21 +121,3 @@ const toggleShowPassword = () => {
             </div>
         </div> 
 </template>
-
-<style scoped>
-.shake {
-     animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-     transform: translate3d(0, 0, 0);
- }
-
- @keyframes shake {
-
-     10%, 90% { transform: translate3d(-1px, 0, 0); }
-
-     20%, 80% { transform: translate3d(2px, 0, 0); }
-
-     30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-
-     40%, 60% { transform: translate3d(4px, 0, 0); }
- }
- </style>
