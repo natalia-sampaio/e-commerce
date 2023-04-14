@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Status](https://img.shields.io/badge/Status-week%202/3-0D1117?style=for-the-badge&labelColor=6be9ff)&nbsp;
+![Status](https://img.shields.io/badge/Status-week%203/3-0D1117?style=for-the-badge&labelColor=E04EF6)&nbsp;
 ![HTML 5](https://img.shields.io/badge/-HTML-0D1117?style=for-the-badge&logo=html5&logoColor=f45430&labelColor=0D1117)&nbsp;
 ![JavaScript](https://img.shields.io/badge/-JavaScript-0D1117?style=for-the-badge&logo=javascript&labelColor=0D1117)&nbsp;
 ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-0D1117?style=for-the-badge&logo=tailwindcss&logoColor=1572B6&labelColor=0D1117)&nbsp;
@@ -131,10 +131,97 @@ Here is *SlideDownFade.Vue* being used:
     </SlideDownFade>
 </template>
 ```
+#### Week 2:
+I learned how to synchronize data persistence (used localStorage) and state management, and it was very eazy once I had a store with all the logic I needed:
+```js
+import { defineStore } from 'pinia';
+import { useLocalStorage } from '@vueuse/core';
+
+export const useCartStore = defineStore('cart', {
+  state: () => {
+    return {
+      toggleCart: false,
+      items: useLocalStorage('cart', [])
+    }
+  },
+  getters: {
+    cartItems(){
+      return this.items.reduce((acc, item) => acc + item.amount, 0)
+    }
+  },
+  actions: {
+    addToCart(product) {
+      const existingProduct = this.items.find(element => element.product.id === product.id);
+
+      if(existingProduct) {
+        existingProduct.amount = existingProduct.amount+1
+      } else {
+        this.items.push({product, amount: 1})
+      }
+    },
+    deleteItem(id) {
+      const productToBeDeleted = this.items.findIndex(element => element.product.id === id)
+      this.items.splice(productToBeDeleted, 1)
+    }
+  }
+})
+```
+
+To consume the DummyJSON API, I decided to abstract the URL's that I needed in the config.js file:
+
+```js
+let domain = 'https://dummyjson.com/products/category/'
+
+export const apiDomain = domain;
+export const mensShoesUrl = apiDomain + 'mens-shoes';
+export const womensShoesUrl = apiDomain + 'womens-shoes';
+export const featuredUrl = apiDomain + 'womens-shoes?limit=1';
+```
+And then the functions that get the JSON objects in the products.js file in the services folder:
+```js
+import { featuredUrl, mensShoesUrl, womensShoesUrl } from '../config.js';
+
+export async function getMensShoes() {
+    const request = mensShoesUrl;
+    const fetchResponse = await fetch(request);
+    const response = await fetchResponse.json();
+    return response.products;
+}
+
+export async function getWomensShoes() {
+    const request = womensShoesUrl;
+    const fetchResponse = await fetch(request);
+    const response = await fetchResponse.json();
+    return response.products;
+}
+
+export async function getFeaturedShoes() {
+    const request = featuredUrl;
+    const fetchResponse = await fetch(request);
+    const response = await fetchResponse.json();
+    return response.products;
+}
+
+export function getDiscountedPrice(id, products) {
+    const product = products.find(element => element.id === id);
+
+    const discountedPrice = product.discountPercentage > 0.0 ? product.price - ((product.price / 100) * product.discountPercentage) : product.price;
+
+    return discountedPrice.toFixed(2);
+}
+
+export function getImages(id, products) {
+    const product = products.find(element => element.id === id);
+
+    const images = product.images;
+    
+    return images;
+}
+```
 ### Useful resources
 - [Vue.js 3 Animations & Transitions Tutorial](https://www.koderhq.com/tutorial/vue/animation/) - This tutorial from KoderHQ helped me understand the basics of Transitions/TransitionGroups and how they work.
 - [John Komarnicki](https://www.youtube.com/@JohnKomarnicki) - John's youtube channel is rich with valuable content and he's a great communicator. I strongly encourage anyone that wants to take their Vue.js development skills to the next level. 
-
+- [Simple Local Storage implementation using Vue 3, Vueuse and Pinia with zero extra lines of code.](https://stephanlangeveld.medium.com/simple-local-storage-implementation-using-vue-3-vueuse-and-pinia-with-zero-extra-lines-of-code-cb9ed2cce42a) - In Stephan Langeveld's blog, he shows a simple way to use localStorage with Pinia.
 
 ## Author
 
