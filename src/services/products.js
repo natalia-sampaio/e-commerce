@@ -31,12 +31,12 @@ export function getFeaturedShoes() {
             "stock": 72,
             "brand": "Sneaker Company",
             "category": "womens-shoes",
-            "thumbnail": "src/assets/images/image-product-1.jpg",
+            "thumbnail": "https://drive.google.com/uc?export=view&id=1Me0kNNbaC-bnftuSH2ni6MBb6mSAQvC1",
             "images": [
-                "src/assets/images/image-product-1.jpg",
-                "src/assets/images/image-product-2.jpg",
-                "src/assets/images/image-product-3.jpg",
-                "src/assets/images/image-product-4.jpg",
+                "https://drive.google.com/uc?export=view&id=1KJ3FxaFwmXr6cUlGSA7Og8-dpVVv9332",
+                "https://drive.google.com/uc?export=view&id=1U16m0_B3IU56FIh_nLYyLdllv8Mv-kIn",
+                "https://drive.google.com/uc?export=view&id=1tk1BNSEBWOi8G6ByQiHbe14r34b4vbiX",
+                "https://drive.google.com/uc?export=view&id=1S5bw4wfk0HOm8xcwvdrKO90ukYl3iauM",
             ]
         }
     ]
