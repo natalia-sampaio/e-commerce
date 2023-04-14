@@ -14,11 +14,34 @@ export async function getWomensShoes() {
     return response.products;
 }
 
-export async function getFeaturedShoes() {
-    const request = featuredUrl;
+export function getFeaturedShoes() {
+    /* const request = featuredUrl;
     const fetchResponse = await fetch(request);
     const response = await fetchResponse.json();
-    return response.products;
+    return response.products; */
+
+    const featured = [
+        {
+            "id": 0,
+            "title": "Fall Limited Edition Sneakers",
+            "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
+            "price": 250,
+            "discountPercentage": 50,
+            "rating": 4.14,
+            "stock": 72,
+            "brand": "Sneaker Company",
+            "category": "womens-shoes",
+            "thumbnail": "src/assets/images/image-product-1.jpg",
+            "images": [
+                "src/assets/images/image-product-1.jpg",
+                "src/assets/images/image-product-2.jpg",
+                "src/assets/images/image-product-3.jpg",
+                "src/assets/images/image-product-4.jpg",
+            ]
+        }
+    ]
+
+    return featured
 }
 
 export function getDiscountedPrice(id, products) {
