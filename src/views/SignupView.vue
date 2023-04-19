@@ -11,6 +11,8 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useUserStore } from '../stores/user.js';
 import IconLogo from '../components/icons/IconLogo.vue';
+import IconGoogle from '../components/icons/IconGoogle.vue';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const store = useUserStore();
 
@@ -53,8 +55,14 @@ const submitForm = async () => {
         store.$patch({
             name: formData.name,
             email: formData.email
-        })
-        router.push('/user-profile')
+        });
+        createUserWithEmailAndPassword(getAuth(), formData.email, formData.password)
+            .then((data) => {
+                router.push('/user-profile')
+            })
+            .catch((error) => {
+                alert(error.message);
+            })
     } else {
         warn.value = true;
         setTimeout(() => {
@@ -115,6 +123,10 @@ const toggleShowPassword = () => {
                     </div>
                 </FormItem>
                 <Button @click="submitForm" :class="{ shake: warn }" name="Submit" class="mt-5"/>
+                <button @click="" class="mt-6 border border-orange-main text-orange-main p-3 rounded-xl w-full flex justify-center items-center" :class="{ shake: warn }" >
+                    <IconGoogle class="mr-4"/>
+                    Sign up with Google
+                </button>
             </div>
             <div class="self-center hidden xl:block">
                 <img src="../assets/images/image-product-1.jpg" alt="" class="rounded-tl-3xl rounded-br-3xl">

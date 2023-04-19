@@ -94,7 +94,9 @@ export default {
         <span class="text-xs text-white rounded-3xl px-2 bg-orange-main absolute right-0 top-1">{{ cartStore.cartItems }}</span>
         <IconCart :fill="cartStore.toggleCart ? '#000000' : '#69707D'" class="m-3" @click="cartStore.toggleCart = !cartStore.toggleCart"/>
       </button>
-      <img src="./assets/images/image-avatar.png" alt="profile avatar" class="w-8 m-3 xl:w-16 xl:ml-10">
+      <RouterLink :to="{ name: 'user-profile' }">
+        <img src="./assets/images/image-avatar.png" alt="profile avatar" class="w-8 m-3 xl:w-16 xl:ml-10">
+      </RouterLink>
     </div>
   </header>
   
