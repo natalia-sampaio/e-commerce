@@ -1,16 +1,37 @@
 <script setup>
-import { RouterLink, RouterView} from 'vue-router'
+import { RouterLink, RouterView, routerKey, useRouter} from 'vue-router'
 import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
 import { useCartStore } from './stores/cart';
 import Cart from './components/Cart.vue';
 import { Transition } from 'vue';
-import NavLinks from './components/NavLinks.vue';
 import IconClose from './components/icons/IconClose.vue';
 import SlideDownFade from './components/SlideDownFade.vue';
+import { onMounted, ref } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
 
 const cartStore = useCartStore();
+
+const isLoggedIn = ref(false);
+
+onMounted(() => {
+  onAuthStateChanged(getAuth(), (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  });
+});
+
+const router = useRouter();
+
+const handleSignOut = () => {
+  signOut(getAuth()).then(() => {
+    router.push('/');
+  });
+}
 </script>
 
 <script>
@@ -48,7 +69,32 @@ export default {
       <IconMenu class="m-3 transition-all duration-700 motion-reduce:transition-all xl:hidden" :class="{'rotate-180': mobileNav}" @click="toggleMobileNav" />
       <RouterLink :to="{name: 'home'}"><IconLogo /></RouterLink>
       <div v-if="desktop" class="w-full">
-        <NavLinks />
+        <ul class="my-10 text-blue-dark-grayish font-normal flex justify-evenly">
+          <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+              <RouterLink :to="{ name: 'collections' }" @click="mobileNav = false">Collections</RouterLink>
+          </li>
+          <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+              <RouterLink :to="{ name: 'men' }" @click="mobileNav = false">Men</RouterLink>
+          </li>
+          <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+              <RouterLink :to="{ name: 'women' }" @click="mobileNav = false">Women</RouterLink>
+          </li>
+          <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+              <RouterLink :to="{ name: 'about' }" @click="mobileNav = false">About</RouterLink >
+          </li>
+          <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+              <RouterLink :to="{ name: 'contact' }" @click="mobileNav = false">Contact</RouterLink>
+          </li>
+          <li v-if="!isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+              <RouterLink :to="{ name: 'sign-in' }">Sign in</RouterLink>
+          </li>
+          <li v-if="!isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
+              <RouterLink :to="{ name: 'sign-up' }" @click="mobileNav = false">Sign up</RouterLink>
+          </li>
+          <li v-if="isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
+              <button @click="handleSignOut()">Sign out</button>
+          </li>
+      </ul>
       </div>
       <Transition name="mobile-nav">
         <div v-show="mobileNav" 
@@ -76,11 +122,14 @@ export default {
               <li class="my-5 xl:ml-10">
                   <RouterLink :to="{ name: 'contact' }" @click="mobileNav = false">Contact</RouterLink>
               </li>
-              <li class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
-                  <button>Sign in</button>
+              <li v-if="!isLoggedIn" class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
+                  <RouterLink :to="{ name: 'sign-in' }">Sign in</RouterLink>
               </li>
-              <li class="my-5 xl:ml-10">
+              <li v-if="!isLoggedIn" class="my-5 xl:ml-10">
                   <RouterLink :to="{ name: 'sign-up' }">Sign up</RouterLink>
+              </li>
+              <li v-if="isLoggedIn" class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
+                <button @click="handleSignOut()">Sign out</button>
               </li>
           </ul>
       </div>

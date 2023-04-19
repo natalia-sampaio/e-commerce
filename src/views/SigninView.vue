@@ -12,7 +12,7 @@ import { ref } from 'vue';
 import { useUserStore } from '../stores/user.js';
 import IconLogo from '../components/icons/IconLogo.vue';
 import IconGoogle from '../components/icons/IconGoogle.vue';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const store = useUserStore();
 
@@ -81,6 +81,23 @@ const animateButton = () => {
         warn.value = false
     }, 1500)
 }
+
+const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider)
+        .then((result) => {
+            router.push('/user-profile')
+        })
+        .catch((error) => {
+            animateButton();
+            if (error.code == 'auth/user-not-found') {
+                $externalResults.value = { email: 'User not found, please register.' }
+            }
+            if (error.code == 'auth/wrong-password') {
+                $externalResults.value = { email: 'User and/or password are incorrect' }
+            }
+        });
+};
 </script>
 
 <template>
@@ -115,7 +132,7 @@ const animateButton = () => {
                 </div>
             </FormItem>
             <Button @click="submitForm" :class="{ shake: warn }" name="Sign in" class="mt-5" />
-            <button @click="" class="mt-6 border border-orange-main text-orange-main p-3 rounded-xl w-full flex justify-center items-center" :class="{ shake: warn }" >
+            <button @click="signInWithGoogle" class="mt-6 border border-orange-main text-orange-main p-3 rounded-xl w-full flex justify-center items-center" :class="{ shake: warn }" >
                 <IconGoogle class="mr-4"/>
                 Sign in with Google
             </button>
