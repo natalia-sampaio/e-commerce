@@ -37,20 +37,24 @@ This project will be divided in three weeks:
     - Shopping cart with state management;
     - Product state management;
     - Transitions and animations.
-- **Week 2:**
+- Week 2:
     - Refactor last week's work;
     - Use LocalStorage for cart data persistance while in guest view;
     - Use [DummyJson API](https://dummyjson.com/docs/products) to feed content to the page;
-    - Create sign up, login and user pages;
+    - Create sign up and login;
+    
+- Week 3:
+    - Refactor last week's work;
+    - Use [Firebase Auth](https://firebase.google.com/products/auth) for user authentication;
+    - ~~Use JWT tokens for user auth;~~
+    - Use [Firebase Firestore](https://firebase.google.com/products/storage) to persist cart data;
+- Week 4:
+    - Create user profile page;
     - Within user profile page: 
         - Favorites 
         - Cart
         - Information;
     - Create checkout page.
-- Week 3:
-    - Refactor last week's work;
-    - Use [Firebase Realtime Database](https://firebase.google.com/docs/database) to persist user information;
-    - Use JWT tokens for user auth;
 
 
 ### Project Setup
@@ -218,10 +222,58 @@ export function getImages(id, products) {
     return images;
 }
 ```
+#### Week 3:
+
+I learned that with Firebase Authentication SDK I don't need to worry about JWT tokens because the library already handles user login state (YAY!). It is also possible to use social login or Federated Identity Providers, that means that I can easily implement login with Google, Facebook, Github and many other providers.
+
+```js
+const submitForm = async () => {
+    const result = await v$.value.$validate();
+    if (result) {
+        store.$patch({
+            name: formData.name,
+            email: formData.email
+        });
+        createUserWithEmailAndPassword(getAuth(), formData.email, formData.password)
+            .then((data) => {
+                router.push('/user-profile')
+            })
+            .catch((error) => {
+                alert(error.message);
+            })
+    } else {
+        animateButton();
+        router.push('/sign-up')
+    }
+}
+```
+
+```js
+const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider)
+        .then((result) => {
+            router.push('/user-profile')
+        })
+        .catch((error) => {
+            animateButton();
+            if(error.code == 'auth/user-not-found') {
+                $externalResults.value = { email: 'User not found, please register.' }
+            }
+            if (error.code == 'auth/wrong-password'){
+                $externalResults.value = { email: 'User and/or password are incorrect' }
+            }
+        });
+};
+```
+
+At first I wanted to use Firebase Realtime Database for the user data, but then a found out about a more recent solution called Firestore, so I decided to use that to store user information, such as cart, favorites and profile.
+
 ### Useful resources
 - [Vue.js 3 Animations & Transitions Tutorial](https://www.koderhq.com/tutorial/vue/animation/) - This tutorial from KoderHQ helped me understand the basics of Transitions/TransitionGroups and how they work.
 - [John Komarnicki](https://www.youtube.com/@JohnKomarnicki) - John's youtube channel is rich with valuable content and he's a great communicator. I strongly encourage anyone that wants to take their Vue.js development skills to the next level. 
 - [Simple Local Storage implementation using Vue 3, Vueuse and Pinia with zero extra lines of code.](https://stephanlangeveld.medium.com/simple-local-storage-implementation-using-vue-3-vueuse-and-pinia-with-zero-extra-lines-of-code-cb9ed2cce42a) - In Stephan Langeveld's blog, he shows a simple way to use localStorage with Pinia.
+- [Firebase Auth and Storage](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jUPIes_B8vRjn1_GaplOPQ) - The Net Ninja is one of the best channels por learning new technologies.
 
 ## Author
 
