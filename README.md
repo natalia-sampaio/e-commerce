@@ -47,10 +47,12 @@ This project will be divided in three weeks:
     - Refactor last week's work;
     - Use [Firebase Auth](https://firebase.google.com/products/auth) for user authentication;
     - ~~Use JWT tokens for user auth;~~
-    - Use [Firebase Firestore](https://firebase.google.com/products/storage) to persist cart data;
+
 - Week 4:
+    - Use [Firebase Firestore](https://firebase.google.com/products/storage) to persist cart data;
     - Create user profile page;
     - Within user profile page: 
+        - User should be able to delete account;
         - Favorites 
         - Cart
         - Information;
