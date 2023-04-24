@@ -53,9 +53,8 @@ This project will be divided in three weeks:
     - Create user profile page;
     - Within user profile page: 
         - User should be able to delete account;
-        - Favorites 
-        - Cart
-        - Information;
+        - User should be able to change password;
+    - When logged in user should have access to "Favorites" button, similar to the cart;
     - Create checkout page.
 
 
