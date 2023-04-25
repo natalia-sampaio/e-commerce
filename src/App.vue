@@ -105,7 +105,7 @@ export default {
           h-full xl:h-auto 
           w-2/3 xl:w-full 
           z-30 xl:z-0 ">
-          <IconClose class="m-5 absolute right-0 transition-all duration-700 motion-reduce:transition-all xl:hidden" @click="toggleMobileNav" :class="{ '-rotate-180': !mobileNav }" />
+          <IconClose class="m-5 absolute right-0 transition-all duration-700 motion-reduce:transition-all xl:hidden" @click="toggleMobileNav" :class="{ '-rotate-180': !mobileNav }" :fill="'#69707D'" />
           <ul class="mx-5 my-10 xl:text-blue-dark-grayish xl:font-normal xl:flex xl:justify-evenly">
               <li class="my-5 xl:ml-10">
                   <RouterLink :to="{ name: 'collections' }" @click="mobileNav = false">Collections</RouterLink>

@@ -4,6 +4,7 @@ import IconCamera from '../components/icons/IconCamera.vue';
 import FormItem from '../components/FormItem.vue';
 import BaseInput from '../components/BaseInput.vue';
 import Button from '../components/Button.vue';
+import IconClose from '../components/icons/IconClose.vue';
 
 const store = useUserStore();
 
@@ -25,6 +26,8 @@ const store = useUserStore();
 
             </div>
         </div>
-        
+        <Button name="Delete account">
+            <IconClose :fill="'#fff'" />
+        </Button>
     </div>
 </template>

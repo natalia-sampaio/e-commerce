@@ -3,6 +3,8 @@ import FormItem from '../components/FormItem.vue';
 import BaseInput from '../components/BaseInput.vue';
 import IconEye from '../components/icons/IconEye.vue';
 import IconClosedEye from '../components/icons/IconClosedEye.vue';
+import IconLogo from '../components/icons/IconLogo.vue';
+import IconGoogle from '../components/icons/IconGoogle.vue';
 import Button from '../components/Button.vue';
 import useVuelidate from '@vuelidate/core';
 import { required, minLength, email } from '@vuelidate/validators'
@@ -10,8 +12,6 @@ import { reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useUserStore } from '../stores/user.js';
-import IconLogo from '../components/icons/IconLogo.vue';
-import IconGoogle from '../components/icons/IconGoogle.vue';
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const store = useUserStore();
@@ -39,7 +39,6 @@ const $externalResults = ref({})
 const v$ = useVuelidate(rules, formData, { $externalResults });
 
 const router = useRouter();
-const warn = ref(false);
 
 const submitForm = async () => {
     $externalResults.value = {};
@@ -69,19 +68,6 @@ const submitForm = async () => {
     }
 }
 
-const showPassword = ref(false);
-
-const toggleShowPassword = () => {
-    showPassword.value = !showPassword.value;
-}
-
-const animateButton = () => {
-    warn.value = true;
-    setTimeout(() => {
-        warn.value = false
-    }, 1500)
-}
-
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
@@ -98,6 +84,21 @@ const signInWithGoogle = () => {
             }
         });
 };
+
+const showPassword = ref(false);
+
+const toggleShowPassword = () => {
+    showPassword.value = !showPassword.value;
+}
+
+const warn = ref(false);
+
+const animateButton = () => {
+    warn.value = true;
+    setTimeout(() => {
+        warn.value = false
+    }, 1500)
+}
 </script>
 
 <template>
