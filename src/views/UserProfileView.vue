@@ -5,8 +5,24 @@ import FormItem from '../components/FormItem.vue';
 import BaseInput from '../components/BaseInput.vue';
 import Button from '../components/Button.vue';
 import IconClose from '../components/icons/IconClose.vue';
+import { getAuth, deleteUser } from "firebase/auth";
+import { useRouter } from 'vue-router';
 
 const store = useUserStore();
+
+const user = getAuth().currentUser;
+const router = useRouter();
+
+const deleteAccount = () => {
+    deleteUser(user)
+        .then(() => {
+            alert('Success! This account was deleted');
+            router.push('/');
+        })
+        .catch((error) => {
+            alert(error.message);
+        })
+}
 
 </script>
 
@@ -26,7 +42,7 @@ const store = useUserStore();
 
             </div>
         </div>
-        <Button name="Delete account">
+        <Button @click="deleteAccount()" name="Delete account">
             <IconClose :fill="'#fff'" />
         </Button>
     </div>

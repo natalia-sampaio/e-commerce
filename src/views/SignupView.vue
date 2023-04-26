@@ -57,6 +57,7 @@ const submitForm = async () => {
         });
         createUserWithEmailAndPassword(getAuth(), formData.email, formData.password)
             .then((data) => {
+                const user = data.user;
                 router.push('/user-profile')
             })
             .catch((error) => {
