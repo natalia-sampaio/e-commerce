@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { deleteField, doc, getDoc, increment, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../main.js';
 
 export const useCartStore = defineStore('cart', {
@@ -12,8 +12,21 @@ export const useCartStore = defineStore('cart', {
     }
   },
   getters: {
-    cartItems(){
+    cartItems() {
       return this.items.reduce((acc, item) => acc + item.amount, 0);
+    },
+    async getUserCart() {
+      if(this.isLoggedIn) {
+        const docRef = doc(db, this.uid, 'cart');
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists() && docSnap.data().items != null) {
+          this.items = docSnap.data().items;
+          return
+        }
+        this.items = [];
+        return
+      }
     }
   },
   actions: {
@@ -23,7 +36,7 @@ export const useCartStore = defineStore('cart', {
       if(existingProduct) {
         existingProduct.amount = existingProduct.amount+1;
         if(this.isLoggedIn) {
-          this.updateFirestore(product);
+          this.updateFirestore(this.items);
         }
       } else {
         this.items.push({product, amount: 1});
@@ -32,48 +45,40 @@ export const useCartStore = defineStore('cart', {
         }
       }
     },
-    async addToFirestore(product) {
-      const docRef = doc(db, this.uid, 'cart');
-      const docSnap = await getDoc(docRef);
-
-      if(docSnap.exists()) {
-        await updateDoc(docRef, {
-          [`item: ${product.id}`]: {
-            product, 
-            amount: 1
-          }
-        });
-      } else {
-        await setDoc(docRef, {
-          [`item: ${product.id}`]: {
-            product, 
-            amount: 1
-          }
-        });
-      }
-    },
-    async updateFirestore(product) {
-      const docRef = doc(db, this.uid, 'cart');
-
-      await updateDoc(docRef, {
-        [`item: ${product.id}.amount`]: increment(1)
-      });
-    },
     deleteItem(id) {
       const productToBeDeleted = this.items.findIndex(element => element.product.id === id);
 
       this.items.splice(productToBeDeleted, 1);
 
       if(this.isLoggedIn){
-        this.deleteFromFirestore(id);
+        this.updateFirestore(this.items);
       }
     },
-    async deleteFromFirestore(id) {
+    async addToFirestore(product) {
       const docRef = doc(db, this.uid, 'cart');
+      const docSnap = await getDoc(docRef);
 
-      await updateDoc(docRef, {
-        [`item: ${id}`]: deleteField()
-      });
+      if (docSnap.exists() && docSnap.data().items != null) {
+        await updateDoc(docRef, {
+          items: arrayUnion({
+            product,
+            amount: 1
+          })
+        });
+      } else {
+        await setDoc(docRef, {
+          items: [
+            {
+              product,
+              amount: 1
+            }
+          ]
+        });
+      }
+    },
+    async updateFirestore(items) {
+      const docRef = doc(db, this.uid, 'cart');
+      await updateDoc(docRef, { items })
     }
   }
 })
