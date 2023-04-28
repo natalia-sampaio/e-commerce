@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { useLocalStorage } from '@vueuse/core';
 import { deleteField, doc, getDoc, increment, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../main.js';
 
@@ -7,7 +6,7 @@ export const useCartStore = defineStore('cart', {
   state: () => {
     return {
       toggleCart: false,
-      items: useLocalStorage('cart', []),
+      items: [],
       isLoggedIn: false,
       uid: ''
     }
@@ -20,6 +19,7 @@ export const useCartStore = defineStore('cart', {
   actions: {
     addToCart(product) {
       const existingProduct = this.items.find(element => element.product.id === product.id);
+
       if(existingProduct) {
         existingProduct.amount = existingProduct.amount+1;
         if(this.isLoggedIn) {
@@ -27,7 +27,7 @@ export const useCartStore = defineStore('cart', {
         }
       } else {
         this.items.push({product, amount: 1});
-        if (this.isLoggedIn) {
+        if(this.isLoggedIn) {
           this.addToFirestore(product);
         }
       }
@@ -35,15 +35,15 @@ export const useCartStore = defineStore('cart', {
     async addToFirestore(product) {
       const docRef = doc(db, this.uid, 'cart');
       const docSnap = await getDoc(docRef);
-      if(docSnap.exists()){
+
+      if(docSnap.exists()) {
         await updateDoc(docRef, {
           [`item: ${product.id}`]: {
             product, 
             amount: 1
           }
-        })
+        });
       } else {
-        console.log('new user cart')
         await setDoc(docRef, {
           [`item: ${product.id}`]: {
             product, 
@@ -54,22 +54,26 @@ export const useCartStore = defineStore('cart', {
     },
     async updateFirestore(product) {
       const docRef = doc(db, this.uid, 'cart');
+
       await updateDoc(docRef, {
         [`item: ${product.id}.amount`]: increment(1)
-      })
+      });
     },
     deleteItem(id) {
-      const productToBeDeleted = this.items.findIndex(element => element.product.id === id)
-      this.items.splice(productToBeDeleted, 1)
+      const productToBeDeleted = this.items.findIndex(element => element.product.id === id);
+
+      this.items.splice(productToBeDeleted, 1);
+
       if(this.isLoggedIn){
-        this.deleteFromFirestore(id)
+        this.deleteFromFirestore(id);
       }
     },
     async deleteFromFirestore(id) {
       const docRef = doc(db, this.uid, 'cart');
+
       await updateDoc(docRef, {
         [`item: ${id}`]: deleteField()
-      })
+      });
     }
   }
 })

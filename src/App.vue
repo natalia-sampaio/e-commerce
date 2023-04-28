@@ -10,6 +10,7 @@ import IconClose from './components/icons/IconClose.vue';
 import SlideDownFade from './components/SlideDownFade.vue';
 import { onMounted, ref } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+import { useLocalStorage } from '@vueuse/core';
 
 const cartStore = useCartStore();
 
@@ -21,6 +22,7 @@ onMounted(() => {
       
     } else {
       cartStore.isLoggedIn = false;
+      cartStore.items = useLocalStorage('cart', [])
     }
   });
 });
