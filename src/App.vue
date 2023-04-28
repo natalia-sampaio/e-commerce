@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView, routerKey, useRouter} from 'vue-router'
+import { RouterLink, RouterView, useRouter} from 'vue-router';
 import IconCart from './components/icons/IconCart.vue';
 import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
@@ -8,8 +8,9 @@ import Cart from './components/Cart.vue';
 import { Transition } from 'vue';
 import IconClose from './components/icons/IconClose.vue';
 import SlideDownFade from './components/SlideDownFade.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+import { useLocalStorage } from '@vueuse/core';
 
 const cartStore = useCartStore();
 
@@ -21,6 +22,7 @@ onMounted(() => {
       
     } else {
       cartStore.isLoggedIn = false;
+      cartStore.items = useLocalStorage('cart', [])
     }
   });
 });
