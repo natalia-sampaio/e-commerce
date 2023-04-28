@@ -13,14 +13,14 @@ import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
 
 const cartStore = useCartStore();
 
-const isLoggedIn = ref(false);
-
 onMounted(() => {
   onAuthStateChanged(getAuth(), (user) => {
     if (user) {
-      isLoggedIn.value = true;
+      cartStore.isLoggedIn = true;
+      cartStore.uid = user.uid;
+      
     } else {
-      isLoggedIn.value = false;
+      cartStore.isLoggedIn = false;
     }
   });
 });
@@ -85,13 +85,13 @@ export default {
           <li class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
               <RouterLink :to="{ name: 'contact' }" @click="mobileNav = false">Contact</RouterLink>
           </li>
-          <li v-if="!isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
+          <li v-if="!cartStore.isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark p-2">
               <RouterLink :to="{ name: 'sign-in' }">Sign in</RouterLink>
           </li>
-          <li v-if="!isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
+          <li v-if="!cartStore.isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
               <RouterLink :to="{ name: 'sign-up' }" @click="mobileNav = false">Sign up</RouterLink>
           </li>
-          <li v-if="isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
+          <li v-if="cartStore.isLoggedIn" class="my-5 ml-5 hover:font-bold hover:text-blue-very-dark border border-blue-grayish hover:border-black rounded p-2">
               <button @click="handleSignOut()">Sign out</button>
           </li>
       </ul>
