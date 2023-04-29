@@ -18,6 +18,7 @@ onMounted(() => {
     if (user) {
       cartStore.isLoggedIn = true;
       cartStore.uid = user.uid;
+      cartStore.getUserCart
     } else {
       cartStore.isLoggedIn = false;
       cartStore.items = []
