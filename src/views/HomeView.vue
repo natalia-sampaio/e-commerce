@@ -6,21 +6,29 @@ import ItemsInput from '../components/ItemsInput.vue'; */
 import IconCart from '../components/icons/IconCart.vue';
 import { useCartStore } from '../stores/cart.js';
 import { getFeaturedShoes, getDiscountedPrice, getImages } from '../services/products.js';
+import IconHeart from '../components/icons/IconHeart.vue';
+import { useFavoritesStore } from '../stores/favorites';
+
 const cartStore = useCartStore();
+const favoritesStore = useFavoritesStore();
+
+defineProps({
+  isLoggedIn: Boolean
+})
 
 </script>
 
 <script>
 export default {
-  data() {
-    return {
-      featured: [],
-      getDiscountedPrice: getDiscountedPrice
-    };
-  },
-  async beforeMount() {
-    this.featured = await getFeaturedShoes();
-  }
+    data() {
+        return {
+            featured: [],
+            getDiscountedPrice: getDiscountedPrice
+        };
+    },
+    async beforeMount() {
+        this.featured = await getFeaturedShoes();
+    }
 }
 </script>
 
@@ -49,6 +57,9 @@ export default {
           <IconCart :fill="'#ffffff'" class="mr-4" />
           Add to cart
         </button>
+      </template>
+      <template #addToFavoritesButton>
+        <IconHeart v-if="isLoggedIn" stroke="#69707D" fill="none" class="w-10 h-10" @click.prevent="favoritesStore.addToFavorites(product)" />
       </template>
     </Product>
   </main>

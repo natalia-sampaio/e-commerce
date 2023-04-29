@@ -2,8 +2,11 @@
 import Banner from '@/components/Banner.vue';
 import IconCart from '@/components/icons/IconCart.vue';
 import { useCartStore } from '../stores/cart';
+import IconHeart from './icons/IconHeart.vue';
+import { useFavoritesStore } from '../stores/favorites';
 
 const cartStore = useCartStore();
+const favoritesStore = useFavoritesStore();
 
 defineProps({
     brandName: "",
@@ -12,7 +15,8 @@ defineProps({
     discount: Number,
     originalPrice: Number ,
     product: Object,
-    images: Array
+    images: Array,
+    isLoggedIn: Boolean
 });
 </script>
 
@@ -30,6 +34,7 @@ defineProps({
                     <span class="bg-orange-main text-orange-pale rounded px-2 py-[0.1rem] mx-4" v-if="discount > 0">{{ discount }}%</span>
                 </div>
                 <span class="text-blue-grayish line-through" v-if="discount > 0">${{ originalPrice }}</span>
+                <IconHeart v-if="isLoggedIn" stroke="#69707D" fill="none" class="w-8 h-8" @click.prevent="favoritesStore.addToFavorites(product)"/>
             </div>
             <div class="mt-6 flex justify-center bg-orange-main rounded-lg">
                 <button class="m-3 flex items-center justify-center text-white" @click.prevent="cartStore.addToCart(product)">

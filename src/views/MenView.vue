@@ -1,6 +1,10 @@
 <script setup>
 import ProductCard from '../components/ProductCard.vue';
 import { getDiscountedPrice, getImages, getMensShoes } from '../services/products';
+
+defineProps({
+    isLoggedIn: Boolean
+})
 </script>
 
 <script>
@@ -31,7 +35,8 @@ export default {
                 :discount="product.discountPercentage" 
                 :originalPrice="product.price" 
                 :product="product"
-                :images="getImages(product.id, mensShoes)" />
+                :images="getImages(product.id, mensShoes)"
+                :isLoggedIn="isLoggedIn" />
         </div>
     </div>
 </template>

@@ -5,23 +5,32 @@ import IconLogo from './components/icons/IconLogo.vue';
 import IconMenu from './components/icons/IconMenu.vue';
 import { useCartStore } from './stores/cart';
 import Cart from './components/Cart.vue';
+import Favorites from './components/Favorites.vue';
 import { Transition } from 'vue';
 import IconClose from './components/icons/IconClose.vue';
 import SlideDownFade from './components/SlideDownFade.vue';
 import { onMounted } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+import IconHeart from './components/icons/IconHeart.vue';
+import { useFavoritesStore } from './stores/favorites';
 
 const cartStore = useCartStore();
+const favoritesStore = useFavoritesStore();
 
 onMounted(() => {
   onAuthStateChanged(getAuth(), (user) => {
     if (user) {
       cartStore.isLoggedIn = true;
+      favoritesStore.isLoggedIn = true;
       cartStore.uid = user.uid;
-      cartStore.getUserCart
+      favoritesStore.uid = user.uid;
+      cartStore.getUserCart;
+      favoritesStore.getUserFavorites;
     } else {
       cartStore.isLoggedIn = false;
-      cartStore.items = []
+      favoritesStore.isLoggedIn = false;
+      cartStore.items = [];
+      favoritesStore.items = [];
     }
   });
 });
@@ -123,13 +132,13 @@ export default {
               <li class="my-5 xl:ml-10">
                   <RouterLink :to="{ name: 'contact' }" @click="mobileNav = false">Contact</RouterLink>
               </li>
-              <li v-if="!isLoggedIn" class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
+              <li v-if="!cartStore.isLoggedIn" class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
                   <RouterLink :to="{ name: 'sign-in' }">Sign in</RouterLink>
               </li>
-              <li v-if="!isLoggedIn" class="my-5 xl:ml-10">
+              <li v-if="!cartStore.isLoggedIn" class="my-5 xl:ml-10">
                   <RouterLink :to="{ name: 'sign-up' }">Sign up</RouterLink>
               </li>
-              <li v-if="isLoggedIn" class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
+              <li v-if="cartStore.isLoggedIn" class="my-5 xl:ml-10 border-b border-blue-dark-grayish pb-5">
                 <button @click="handleSignOut()">Sign out</button>
               </li>
           </ul>
@@ -140,6 +149,7 @@ export default {
       </Transition>
     </div>
     <div class="flex items-center">
+      <IconHeart v-if="cartStore.isLoggedIn" fill="none" stroke="#69707D" class="w-6 h-6" @click="favoritesStore.toggleFavorites = !favoritesStore.toggleFavorites" />
       <button class="relative">
         <span class="text-xs text-white rounded-3xl px-2 bg-orange-main absolute right-0 top-1">{{ cartStore.cartItems }}</span>
         <IconCart :fill="cartStore.toggleCart ? '#000000' : '#69707D'" class="m-3" @click="cartStore.toggleCart = !cartStore.toggleCart"/>
@@ -151,9 +161,10 @@ export default {
   </header>
   
   <Cart v-if="cartStore.toggleCart" />
+  <Favorites v-if="favoritesStore.toggleFavorites" />
 
   <SlideDownFade>
-    <RouterView />
+    <RouterView :isLoggedIn="cartStore.isLoggedIn" />
   </SlideDownFade>
 </template>
 

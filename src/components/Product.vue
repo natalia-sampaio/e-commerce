@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Banner from '../components/Banner.vue';
+import IconHeart from './icons/IconHeart.vue';
 
 const numberOfItems = ref(0)
 
@@ -27,16 +28,19 @@ defineProps({
                 <div>
                     <span class="text-3xl mr-4">${{ finalCost }}</span>
                     <slot name="discount"></slot>
-                    
                 </div>
                 <span class="line-through text-blue-grayish"><slot name="cost"></slot></span>
             </div>
             <!-- <div class="flex items-center justify-center m-6 h-12">
                 <slot name="numberOfItems" :numberOfItems="numberOfItems"></slot>
             </div> -->
-            <div class="m-6 mb-16 xl:mb-0 flex justify-center bg-orange-main rounded-lg shadow-custom xl:w-2/3">
-                <slot name="addToCartButton"></slot>
+            <div class="flex items-center">
+                <div class="m-6 flex justify-center bg-orange-main rounded-lg shadow-custom xl:w-2/3">
+                    <slot name="addToCartButton"></slot>
+                </div>
+                <slot name="addToFavoritesButton"></slot>
             </div>
+            
         </div>
         
     </div>
