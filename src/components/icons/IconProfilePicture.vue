@@ -1,0 +1,3 @@
+<template>
+    <svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <circle style="fill:hsl(26, 100%, 55%);" cx="256" cy="129.92" r="129.92"></circle> <path style="fill:hsl(26, 100%, 55%);" d="M461.696,512C459.456,387.904,368.32,288.016,256,288.016S52.544,387.904,50.304,512H461.696z"></path> </g> </g></svg>
+</template>

@@ -13,6 +13,7 @@ import { minLength, email } from '@vuelidate/validators'
 import IconEditPencil from '../components/icons/IconEditPencil.vue';
 import IconRefresh from '../components/icons/IconRefresh.vue';
 import IconUpload from '../components/icons/IconUpload.vue';
+import IconProfilePicture from '../components/icons/IconProfilePicture.vue';
 import uploadProfilePic from '../services/uploadProfilePic.js';
 
 const inputProfilePicture = ref(false);
@@ -43,6 +44,7 @@ const updateUsername= async () => {
         userStore.$patch({
             name: formData.name
         });
+        userStore.updateUsername();
     } else {
         animateButton();
     }
@@ -82,15 +84,15 @@ onMounted(() => {
 const profilePic = ref(null);
 const setFile = (event) => {
     profilePic.value = event.target.files[0]
-}
-
+};
 </script>
 
 <template>
-    <div class="mx-48">
+    <div class="mx-8 xl:mx-48">
         <div class="relative max-w-fit mb-4">
-            <img src="../assets/images/image-avatar.png" alt="">
-            <IconCamera class="absolute right-0 bottom-0 w-7" @click="inputProfilePicture = true" />
+            <IconProfilePicture v-if="userStore.profilePicture == ''" class="w-8 h-8 xl:w-20 xl:h-20" />
+            <img v-else :src="userStore.profilePicture" alt="" class="rounded-full w-16 h-16 xl:w-32 xl:h-32 object-cover">
+            <IconCamera class="absolute right-0 bottom-0 w-5 xl:w-7" @click="inputProfilePicture = true" />
         </div>
         <div v-if="inputProfilePicture" class="grid justify-items-center gap-4 mb-10 w-fit" >
             <BaseInput type="file" class="p-3 rounded-xl" accept="image/*" @change="setFile"/>
@@ -102,15 +104,15 @@ const setFile = (event) => {
             Welcome, 
             <span class="font-normal">{{ userStore.name }}</span>.
         </h2>
-        <div class="font-normal m-10 border border-blue-very-dark rounded-tl-xl rounded-br-xl p-5 grid grid-rows-3 items-center lg:w-1/2">
+        <div class="font-normal my-10 lg:m-10 border border-blue-very-dark rounded-tl-xl rounded-br-xl p-5 grid grid-rows-3 items-center w-full lg:w-1/2">
             <h3 class="text-xl pb-2 border-b-2 mb-2">This is your profile information:</h3>
-            <span v-if="userStore.name != ''" class="flex justify-between items-center border-b">Name: {{ userStore.name }} <IconEditPencil @click="userStore.name = ''" /></span>
+            <span v-if="userStore.name != ''" class="flex justify-between items-center border-b mb-1">Name: {{ userStore.name }} <IconEditPencil @click="userStore.name = ''" /></span>
             <FormItem v-else>
                 <template #label>Name</template>
                 <template #error v-for="error in v$.name.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
                 <div class="flex items-center relative">
                     <BaseInput type="text" placeholder="e.g. Casimiro Silva" aria-label="name input" v-model="formData.name" class="w-full"/>
-                    <IconRefresh @click="updateUsername" class="absolute right-2" />
+                    <IconRefresh @click="updateUsername()" class="absolute right-2" />
                 </div>
             </FormItem>
             <span v-if="userStore.email != ''" class="flex justify-between items-center">E-mail: {{ userStore.email }}</span>
@@ -119,7 +121,7 @@ const setFile = (event) => {
                 <template #error v-for="error in v$.email.$errors" :key="error.$uid" class="text-red-600">{{ error.$message }}</template>
                 <BaseInput type="text" placeholder="e.g. casimiro.silva@email.com" aria-label="email input" v-model="formData.email" />
             </FormItem>
-            <Button @click="deleteAccount()" name="Delete account">
+            <Button @click="deleteAccount()" name="Delete account" class="mt-10">
                 <IconClose :fill="'#fff'" />
             </Button>
         </div>

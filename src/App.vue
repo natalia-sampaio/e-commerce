@@ -13,9 +13,12 @@ import { onMounted } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
 import IconHeart from './components/icons/IconHeart.vue';
 import { useFavoritesStore } from './stores/favorites';
+import IconProfilePicture from './components/icons/IconProfilePicture.vue';
+import { useUserStore } from './stores/user';
 
 const cartStore = useCartStore();
 const favoritesStore = useFavoritesStore();
+const userStore = useUserStore();
 
 onMounted(() => {
   onAuthStateChanged(getAuth(), (user) => {
@@ -40,6 +43,7 @@ const router = useRouter();
 const handleSignOut = () => {
   signOut(getAuth()).then(() => {
     router.push('/');
+    location.reload();
   });
 }
 </script>
@@ -155,7 +159,10 @@ export default {
         <IconCart :fill="cartStore.toggleCart ? '#000000' : '#69707D'" class="m-3" @click="cartStore.toggleCart = !cartStore.toggleCart"/>
       </button>
       <RouterLink :to="{ name: 'user-profile' }">
-        <img src="./assets/images/image-avatar.png" alt="profile avatar" class="w-8 m-3 xl:w-16 xl:ml-10">
+        <div class="w-8 h-8 m-3 xl:w-16 xl:h-16 xl:ml-10">
+          <img v-if="userStore.profilePicture != ''" :src="userStore.profilePicture" alt="" class="w-8 h-8 xl:w-16 xl:h-16 rounded-full object-cover">
+          <IconProfilePicture v-else-if="userStore.isLoggedIn" class="w-8 h-8 xl:w-16 xl:h-16"/>
+        </div>
       </RouterLink>
     </div>
   </header>
