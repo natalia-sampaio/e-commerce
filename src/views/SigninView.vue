@@ -14,7 +14,7 @@ import { ref } from 'vue';
 import { useUserStore } from '../stores/user.js';
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-const store = useUserStore();
+const userStore = useUserStore();
 
 const formData = reactive({
     email: "",
@@ -45,7 +45,7 @@ const submitForm = async () => {
     const result = await v$.value.$validate();
 
     if (result) {
-        store.$patch({
+        userStore.$patch({
             name: formData.name,
             email: formData.email
         });
@@ -72,7 +72,7 @@ const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
         .then((result) => {
-            router.push('/user-profile')
+            router.push('/user-profile');
         })
         .catch((error) => {
             animateButton();

@@ -9,6 +9,7 @@ import './assets/main.css'
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8N1ePfbQItb5k5m2B_7xkToAKfGGbWzM",
@@ -20,6 +21,7 @@ const firebaseConfig = {
 };
 
 const db = getFirestore(initializeApp(firebaseConfig));
+const storage = getStorage(initializeApp(firebaseConfig));
 
 const app = createApp(App);
 
@@ -28,4 +30,4 @@ app.use(router);
 
 app.mount('#app');
 
-export { db };
+export { db, storage };

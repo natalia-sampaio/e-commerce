@@ -58,11 +58,14 @@ const submitForm = async () => {
         createUserWithEmailAndPassword(getAuth(), formData.email, formData.password)
             .then((data) => {
                 const user = data.user;
+                userStore.uid = user.uid;
+                userStore.addToFirestore();
+                userStore.isLoggedIn = true;
                 router.push('/user-profile')
             })
             .catch((error) => {
                 alert(error.message);
-            })
+            });
     } else {
         animateButton();
         router.push('/sign-up')
@@ -73,6 +76,10 @@ const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
         .then((result) => {
+            userStore.email = result.user.email;
+            userStore.name = result.user.displayName;
+            userStore.uid = result.user.uid;
+            userStore.addToFirestore();
             router.push('/user-profile')
         })
         .catch((error) => {
